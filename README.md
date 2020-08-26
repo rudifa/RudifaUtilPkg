@@ -1,3 +1,7 @@
 # RudifaUtilPkg
 
-A description of this package.
+Package contains extensions and utility methods.
+
+###TODO
+
+
