@@ -23,18 +23,18 @@ import Foundation
 /// Wrapper CodableUserDefault<Key, Value>
 /// enables creation of variables of any type conforming to Codable protocol
 @propertyWrapper
-struct CodableUserDefault<Key: RawRepresentable, Value: Codable> where Key.RawValue == String {
+public struct CodableUserDefault<Key: RawRepresentable, Value: Codable> where Key.RawValue == String {
     let key: Key
     let defaultValue: Value
     private var userDefaults: UserDefaults
 
-    init(key: Key, defaultValue: Value, userDefaults: UserDefaults = UserDefaults.standard) {
+    public init(key: Key, defaultValue: Value, userDefaults: UserDefaults = UserDefaults.standard) {
         self.key = key
         self.defaultValue = defaultValue
         self.userDefaults = userDefaults
     }
 
-    var wrappedValue: Value {
+    public var wrappedValue: Value {
         get {
             var value = defaultValue
             if let data = userDefaults.data(forKey: key.rawValue) {
@@ -55,18 +55,18 @@ struct CodableUserDefault<Key: RawRepresentable, Value: Codable> where Key.RawVa
 /// enables creation of variables of any .plist-compatible type
 /// (Data, String, Number, Date, Array and Dictionary)
 @propertyWrapper
-struct PlistUserDefault<Key: RawRepresentable, Value> where Key.RawValue == String {
+public struct PlistUserDefault<Key: RawRepresentable, Value> where Key.RawValue == String {
     let key: Key
     let defaultValue: Value
     var userDefaults: UserDefaults = .standard
 
-    init(key: Key, defaultValue: Value, userDefaults: UserDefaults = UserDefaults.standard) {
+    public init(key: Key, defaultValue: Value, userDefaults: UserDefaults = UserDefaults.standard) {
         self.key = key
         self.defaultValue = defaultValue
         self.userDefaults = userDefaults
     }
 
-    var wrappedValue: Value {
+    public var wrappedValue: Value {
         get {
             let value = userDefaults.value(forKey: key.rawValue) as? Value
             return value ?? defaultValue
