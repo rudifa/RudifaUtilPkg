@@ -33,6 +33,8 @@ jobs:
       run: git add .
     - name: git ci
       run: git commit -m "update jazzy docs"
+    - name: git push
+      run: git push
     - name: git co
       run: git checkout master
 
