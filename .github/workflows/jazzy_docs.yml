@@ -19,4 +19,12 @@ jobs:
       run: gem install jazzy
     - name: build jazzy docs
       run: jazzy
+    - name: pwd
+      run: pwd
+    - name: git br
+      run: git branch
+    - name: git st
+      run: git status
+      
+      
       
