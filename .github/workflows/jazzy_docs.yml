@@ -16,15 +16,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install jazzy
-      run: gem install jazzy
+      run: gem install jazzy --no-document
     - name: build jazzy docs
       run: jazzy
-    - name: pwd
-      run: pwd
-    - name: git br
-      run: git branch
-    - name: git st
-      run: git status
     - name: git fetch
       run: git fetch
     - name: git co
