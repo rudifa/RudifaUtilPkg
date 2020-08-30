@@ -26,8 +26,8 @@ class XCTestExtTests: XCTestCase {
     override func tearDown() {}
 
     func test_XCTAssertMatchesRegex() {
-        let dateString = Date().EEEE_ddMMyyyy_HHmmss_ZZZZZ
-        // XCTAssertEqual(dateString, "Friday 28.08.2020 15:27:21 +02:00")
-        XCTAssertMatchesRegex(dateString, #"^[A-Z][a-z]+ \d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2} [+-]\d{2}:\d{2}$"#)
+        let dateString = Date().EEEE_ddMMyyyy_HHmmss
+        // XCTAssertEqual(dateString, "Friday 28.08.2020 15:27:21")
+        XCTAssertMatchesRegex(dateString, #"^[A-Z][a-z]+ \d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}$"#)
     }
 }
