@@ -25,6 +25,8 @@ jobs:
       run: git branch
     - name: git st
       run: git status
+    - name: git fetch
+      run: git fetch
     - name: git co
       run: git checkout gh-pages
     - name: git add
