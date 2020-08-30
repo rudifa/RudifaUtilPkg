@@ -17,12 +17,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: install jazzy
       run: gem install jazzy --no-document
-    - name: build jazzy docs
-      run: jazzy
     - name: git fetch
       run: git fetch
     - name: git co
       run: git checkout gh-pages
+    - name: build jazzy docs
+      run: jazzy
     - name: git add
       run: git add .
     - name: git ci
