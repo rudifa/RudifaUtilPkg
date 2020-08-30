@@ -6,8 +6,6 @@
 //  Copyright © 2019 Rudolf Farkas. All rights reserved.
 //
 
-import UIKit
-
 extension Array where Element: Equatable {
     /// Return array containing elements of self that are also in other, plus elements from other that are not in self
     /// - Parameter other: the array to update from
