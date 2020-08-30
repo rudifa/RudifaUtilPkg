@@ -1,0 +1,22 @@
+name: jazzy_docs
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+    branches: [ master ]
+    
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: nstall jazzy
+      run: gem install jazzy
+    - name: build jazzy docs
+      run: jazzy
+      
