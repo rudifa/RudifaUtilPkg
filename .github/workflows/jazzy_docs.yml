@@ -25,6 +25,14 @@ jobs:
       run: git branch
     - name: git st
       run: git status
-      
+    - name: git co
+      run: git checkout gh-pages
+    - name: git add
+      run: git add .
+    - name: git ci
+      run: git commit -m "update jazzy docs"
+    - name: git co
+      run: git checkout master
+
       
       
