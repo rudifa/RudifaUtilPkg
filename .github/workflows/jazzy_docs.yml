@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: nstall jazzy
+    - name: install jazzy
       run: gem install jazzy
     - name: build jazzy docs
       run: jazzy
