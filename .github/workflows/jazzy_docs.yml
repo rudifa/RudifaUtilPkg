@@ -15,22 +15,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: install jazzy
       run: gem install jazzy --no-document
-    - name: git fetch
-      run: git fetch
+
     - name: build jazzy docs on master
       run: jazzy
-    - name: git checkout gh-pages
-      run: git checkout gh-pages
+
+    - name: git fetch
+      run: git fetch
+    - name: git checkout -f gh-pages
+      run: git checkout -f gh-pages
     - name: git add
       run: git add .
     - name: git ci
       run: git commit -m "update jazzy docs"
     - name: git push
       run: git push
-    - name: git co
-      run: git checkout master
+    
 
       
       
