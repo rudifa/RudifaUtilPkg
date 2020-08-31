@@ -9,10 +9,14 @@
 import Foundation
 
 // https://stackoverflow.com/questions/51103795/how-to-get-next-case-of-enumi-e-write-a-circulating-method-in-swift-4-2
-/// Extension adds a circular iterator to a CaseIterable item, usually an enum
-///     enum MyEnum: CaseIterable { case a, b, c }
-///     var letter = MyEnum.a
-///     letter = letter.next
+/**
+ Extension adds a circular iterator to a CaseIterable item, usually an enum
+ ```
+    enum MyEnum: CaseIterable { case a, b, c }
+    var letter = MyEnum.a
+    letter = letter.next
+ ```
+*/
 extension CaseIterable where Self: Equatable {
     /// Returns allCases as Array
     private var all: [Self] {
