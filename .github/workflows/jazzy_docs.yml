@@ -19,20 +19,20 @@ jobs:
     - name: install jazzy
       run: gem install jazzy --no-document
 
-    - name: git fetch
-      run: git fetch
- 
-    - name: git checkout gh-pages
-      run: git checkout gh-pages
-
-    - name: git merge master
-      run: git merge master
-
     - name: build jazzy docs on master
       run: jazzy
 
-    - name: git add
-      run: git add .
+    - name: stash
+      run: git stash
+
+    - name: git fetch
+      run: git fetch
+    - name: git checkout gh-pages
+      run: git checkout gh-pages
+
+    - name: git checkout stash
+      run: git checkout stash -- .
+
     - name: git ci
       run: git commit -m "update jazzy docs"
     - name: git push
