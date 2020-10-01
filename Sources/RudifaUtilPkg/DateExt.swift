@@ -153,28 +153,41 @@ extension Date {
         else { print("*** set hour failed") }
     }
 
+
+    /// Returns a date where components smaller than `calendarComponent` are set to 0
+    ///
+    /// Example
+    /// let date = Date().whole(.hour) returns the date at the start of current hour
+    /// - Parameters:
+    ///   - calendarComponent: one of [.year, .month, .day, .hour, .minute, .second]
+    /// - Returns: modified date
+    public func whole(_ calendarComponent: Calendar.Component) -> Date? {
+        let components: [Calendar.Component] = [.year, .month, .day, .hour, .minute, .second]
+        guard let idx = components.firstIndex(of: calendarComponent) else { return nil }
+        let remaining = components[...idx]
+        let dateComponents = Calendar.current.dateComponents(Set(remaining), from: self)
+        return Calendar.current.date(from: dateComponents)
+    }
+
     /// Returns a date setting the minute, second all to 0
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
     public var wholeHour: Date? {
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour], from: self)
-        return Calendar.current.date(from: dateComponents)
+        return self.whole(.hour)
     }
 
     /// Returns a date setting the hour, minute, second all to 0
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
     public var wholeDay: Date? {
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
-        return Calendar.current.date(from: dateComponents)
+        return self.whole(.day)
     }
 
     /// Returns a date setting the day to 1, hour, minute, second all to 0
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
     public var wholeMonth: Date? {
-        let dateComponents = Calendar.current.dateComponents([.year, .month], from: self)
-        return Calendar.current.date(from: dateComponents)
+        return self.whole(.month)
     }
 
     // MARK: - properties
