@@ -16,7 +16,7 @@ import Foundation
     var letter = MyEnum.a
     letter = letter.next
  ```
-*/
+ */
 extension CaseIterable where Self: Equatable {
     /// Returns allCases as Array
     private var all: [Self] {

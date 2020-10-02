@@ -77,7 +77,32 @@ class DateIntervalExtTests: XCTestCase {
         XCTAssertTrue(intervalD_1_00_to_2_00.partiallyOverlaps(with: intervalC_0_30_to_1_30))
         XCTAssertTrue(intervalD_1_00_to_2_00.partiallyOverlaps(with: intervalD_1_00_to_2_00))
     }
+
+    func test_DateIntervalExtensions() {
+        let calendar = Calendar.current
+        let refDate = calendar.date(from: DateComponents(calendar: calendar, year: 2020, month: 1, day: 28, hour: 14))!
+
+        let firstHour = Calendar.current.dateInterval(of: .hour, for: refDate)!
+        let oneHour = firstHour.duration
+        let firstThreeHours = DateInterval(start: refDate, duration: 3.0 * oneHour)
+
+        let zeroHour = DateInterval(start: refDate - oneHour * 1.0, duration: oneHour)
+        let halfHour = DateInterval(start: refDate - oneHour * 0.5, duration: oneHour)
+        let secondHour = DateInterval(start: refDate + oneHour, duration: oneHour)
+        let fourthHour = DateInterval(start: refDate + oneHour * 4.0, duration: oneHour)
+
+        XCTAssertTrue(firstHour.fullyOverlaps(with: firstThreeHours))
+        XCTAssertFalse(firstHour.fullyOverlaps(with: halfHour))
+
+        XCTAssertTrue(firstThreeHours.fullyOverlaps(with: firstHour))
+        XCTAssertTrue(firstThreeHours.fullyOverlaps(with: secondHour))
+
+        XCTAssertFalse(firstThreeHours.fullyOverlaps(with: halfHour))
+        XCTAssertFalse(firstThreeHours.fullyOverlaps(with: fourthHour))
+        XCTAssertFalse(firstThreeHours.fullyOverlaps(with: zeroHour))
+    }
 }
+
 class DateIntervalTests: XCTestCase {
     func test_DateInterval_operations() {
         let dateFormatter = DateFormatter()
