@@ -8,9 +8,9 @@
 
 import Foundation
 
-// Extensions inspired by https://gist.github.com/StanislavK/e763cdc9fbe92f62f3c9dbd648e7e7ad
-
 /**
+ Extensions nspired by https://gist.github.com/StanislavK/e763cdc9fbe92f62f3c9dbd648e7e7ad
+
  Usage examples
 
     struct Language: Codable {
