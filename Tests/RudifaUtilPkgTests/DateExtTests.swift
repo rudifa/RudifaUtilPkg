@@ -181,6 +181,9 @@ class DateExtTests: XCTestCase {
         XCTAssertEqual(date1.wholeHour!.ddMMyyyy_HHmmss, "29.09.2020 14:00:00")
         XCTAssertEqual(date1.wholeDay!.ddMMyyyy_HHmmss, "29.09.2020 00:00:00")
         XCTAssertEqual(date1.wholeMonth!.ddMMyyyy_HHmmss, "01.09.2020 00:00:00")
+
+        // test the added format
+        XCTAssertEqual(date1.ddMMyyyy_HHmm, "29.09.2020 14:34")
     }
 
     func test_MoreExtendedDateModsAndProps() {
