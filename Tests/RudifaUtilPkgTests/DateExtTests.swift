@@ -167,6 +167,22 @@ class DateExtTests: XCTestCase {
         print("--- date.wholeHour: \(dd.wholeHour!.ddMMyyyy)  \(dd.wholeHour!.HHmmss) ")
     }
 
+    func test_WholeComponent() {
+        let date1Comp = DateComponents(timeZone: TimeZone.current, year: 2020, month: 9, day: 29, hour: 14, minute: 34, second: 59, nanosecond: 123_456_789)
+        let date1 = Calendar.current.date(from: date1Comp)!
+        XCTAssertEqual(date1.ddMMyyyy_HHmmss, "29.09.2020 14:34:59")
+        XCTAssertEqual(date1.whole(.second)!.ddMMyyyy_HHmmss, "29.09.2020 14:34:59")
+        XCTAssertEqual(date1.whole(.minute)!.ddMMyyyy_HHmmss, "29.09.2020 14:34:00")
+        XCTAssertEqual(date1.whole(.hour)!.ddMMyyyy_HHmmss, "29.09.2020 14:00:00")
+        XCTAssertEqual(date1.whole(.day)!.ddMMyyyy_HHmmss, "29.09.2020 00:00:00")
+        XCTAssertEqual(date1.whole(.month)!.ddMMyyyy_HHmmss, "01.09.2020 00:00:00")
+        XCTAssertEqual(date1.whole(.year)!.ddMMyyyy_HHmmss, "01.01.2020 00:00:00")
+
+        XCTAssertEqual(date1.wholeHour!.ddMMyyyy_HHmmss, "29.09.2020 14:00:00")
+        XCTAssertEqual(date1.wholeDay!.ddMMyyyy_HHmmss, "29.09.2020 00:00:00")
+        XCTAssertEqual(date1.wholeMonth!.ddMMyyyy_HHmmss, "01.09.2020 00:00:00")
+    }
+
     func test_MoreExtendedDateModsAndProps() {
         /**
          print("--- DateFormatter().timeZone: \(String(describing: DateFormatter().timeZone))")

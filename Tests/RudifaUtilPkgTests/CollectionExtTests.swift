@@ -1,6 +1,6 @@
 //
-//  CollectionExtTests.swift v.0.2.0
-//  RudifaUtilPkgTests
+//  CollectionUtilTests.swift v.0.2.0
+//  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 24.12.19.
 //  Copyright © 2019 Rudolf Farkas. All rights reserved.
@@ -8,12 +8,12 @@
 
 import XCTest
 
-class CollectionExtTests: XCTestCase {
+class CollectionUtilTests: XCTestCase {
     override func setUp() {}
 
     override func tearDown() {}
 
-    func test_updatePreservingOrder() {
+    func test_updatedPreservingOrder() {
         let aaa = [5, 4, 3, 2, 1]
 
         XCTAssertEqual(aaa.updatedPreservingOrder(from: aaa), [5, 4, 3, 2, 1])
