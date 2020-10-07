@@ -61,6 +61,11 @@ extension Date {
         return formatted(fmt: "dd.MM.yyyy HH:mm:ss")
     }
 
+    /// Returns the detailed local date-time string, like "24.07.2019 10:25"
+    public var ddMMyyyy_HHmm: String {
+        return formatted(fmt: "dd.MM.yyyy HH:mm")
+    }
+
     /// Returns the detailed local date-time string, like "Wednesday 24.07.2019 10:00:00"
     public var EEEE_ddMMyyyy_HHmmss: String {
         return formatted(fmt: "EEEE dd.MM.yyyy HH:mm:ss")
