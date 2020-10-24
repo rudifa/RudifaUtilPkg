@@ -73,6 +73,14 @@ class DateExtTests: XCTestCase {
         XCTAssertEqual("12:00:00.000", date0UTC.HHmmssSSS)
         XCTAssertEqual("February 1938", date0UTC.MMMM_yyyy)
         print("--- Once upon a time", date0UTC.ddMMyyyy, "at", date0.HHmmss, "...")
+
+        // test more extended formats
+        XCTAssertEqual("12:00:00", date0UTC.HHmmss)
+        XCTAssertEqual("12:00", date0UTC.HHmm)
+        XCTAssertEqual("10.02.1938 12:00:00", date0UTC.ddMMyyyy_HHmmss)
+        XCTAssertEqual("10.02.1938 12:00", date0UTC.ddMMyyyy_HHmm)
+        XCTAssertEqual("Thursday 10.02.1938 12:00:00", date0UTC.EEEE_ddMMyyyy_HHmmss)
+        XCTAssertEqual("Thursday 10.02.1938 12:00", date0UTC.EEEE_ddMMyyyy_HHmm)
     }
 
     func testInit() {
