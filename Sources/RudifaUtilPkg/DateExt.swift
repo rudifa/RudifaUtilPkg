@@ -44,6 +44,11 @@ extension Date {
         return formatted(fmt: "HH:mm:ss")
     }
 
+    /// Returns the local time string like "20:44"
+    public var HHmm: String {
+        return formatted(fmt: "HH:mm")
+    }
+
     /// Returns the local time string with milliseconds, like "12:00:00.000"
     public var HHmmssSSS: String {
         return formatted(fmt: "HH:mm:ss.SSS")
@@ -69,6 +74,11 @@ extension Date {
     /// Returns the detailed local date-time string, like "Wednesday 24.07.2019 10:00:00"
     public var EEEE_ddMMyyyy_HHmmss: String {
         return formatted(fmt: "EEEE dd.MM.yyyy HH:mm:ss")
+    }
+
+    /// Returns the detailed local date-time string, like "Wednesday 24.07.2019 10:00"
+    public var EEEE_ddMMyyyy_HHmm: String {
+        return formatted(fmt: "EEEE dd.MM.yyyy HH:mm")
     }
 
     /// Returns the detailed local date-time string, like "Wednesday 24.07.2019 10:00:00 +02:00"
