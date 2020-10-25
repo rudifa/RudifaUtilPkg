@@ -81,6 +81,11 @@ class DateExtTests: XCTestCase {
         XCTAssertEqual("10.02.1938 12:00", date0UTC.ddMMyyyy_HHmm)
         XCTAssertEqual("Thursday 10.02.1938 12:00:00", date0UTC.EEEE_ddMMyyyy_HHmmss)
         XCTAssertEqual("Thursday 10.02.1938 12:00", date0UTC.EEEE_ddMMyyyy_HHmm)
+
+        // create a test Date
+        let testDate = Date(timeIntervalSinceReferenceDate: 625_329_725.286_747)
+        XCTAssertEqual(testDate.ddMMyyyy_HHmmss_𝜇s, "2020-10-25 15:42:05.286747")
+        XCTAssertEqual(testDate.HHmmssSSS, "15:42:05.287")
     }
 
     func testInit() {

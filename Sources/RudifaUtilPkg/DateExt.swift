@@ -54,6 +54,20 @@ extension Date {
         return formatted(fmt: "HH:mm:ss.SSS")
     }
 
+    /// Return a dateTimeString with microsecond resolution, like "2020-10-25 15:42:05.286747"
+    var ddMMyyyy_HHmmss_𝜇s: String {
+        let cal = Calendar.current
+        let comps = cal.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond],
+                                       from: self)
+        let microSeconds = lrint(Double(comps.nanosecond!) / 1000) // Divide by 1000 and round
+
+        let formatted = String(format: "%04ld-%02ld-%02ld %02ld:%02ld:%02ld.%06ld",
+                               comps.year!, comps.month!, comps.day!,
+                               comps.hour!, comps.minute!, comps.second!,
+                               microSeconds)
+        return formatted
+    }
+
     /// Initializes self to the date at the specified secondsInto21stCentury
     ///
     /// - Parameter secondsInto21stCentury: seconds since 00:00:00 UTC on 1 January 2001
@@ -168,7 +182,6 @@ extension Date {
         else { print("*** set hour failed") }
     }
 
-
     /// Returns a date where components smaller than `calendarComponent` are set to 0
     ///
     /// Example
@@ -188,21 +201,21 @@ extension Date {
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
     public var wholeHour: Date? {
-        return self.whole(.hour)
+        return whole(.hour)
     }
 
     /// Returns a date setting the hour, minute, second all to 0
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
     public var wholeDay: Date? {
-        return self.whole(.day)
+        return whole(.day)
     }
 
     /// Returns a date setting the day to 1, hour, minute, second all to 0
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
     public var wholeMonth: Date? {
-        return self.whole(.month)
+        return whole(.month)
     }
 
     // MARK: - properties
