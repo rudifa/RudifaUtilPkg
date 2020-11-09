@@ -30,14 +30,16 @@ jobs:
 
     - name: git fetch
       run: git fetch
+
     - name: git checkout gh-pages
       run: git checkout gh-pages
 
     - name: git checkout stash
       run: git checkout stash -- .
 
-    - name: git ci
+    - name: git commit
       run: git commit -m "update jazzy docs"
+
     - name: git push
       run: git push
     
