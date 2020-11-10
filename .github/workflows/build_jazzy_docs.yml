@@ -16,6 +16,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: echo $GITHUB_SHA
+      run: echo $GITHUB_SHA
+
     - name: git fetch
       run: git fetch
 
