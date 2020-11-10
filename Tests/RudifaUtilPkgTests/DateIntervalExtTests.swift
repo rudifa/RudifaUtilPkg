@@ -78,6 +78,33 @@ class DateIntervalExtTests: XCTestCase {
         XCTAssertTrue(intervalD_1_00_to_2_00.partiallyOverlaps(with: intervalD_1_00_to_2_00))
     }
 
+    static let dint = DateInterval(startDate: Date(), durationHours: 3)
+
+    func test_DateIntervalExt_2() {
+        // create a test Date
+        let testDate = Date(timeIntervalSinceReferenceDate: 625_329_725.286_747)
+        let secondsFromUTC = TimeZone.current.secondsFromGMT(for: testDate)
+        let testDateUTC = testDate.addingTimeInterval(-TimeInterval(secondsFromUTC))
+
+        XCTAssertEqual(testDateUTC.ddMMyyyy_HHmmss_𝜇s, "2020-10-25 14:42:05.286747")
+        XCTAssertEqual(testDateUTC.HHmmssSSS, "14:42:05.287")
+
+        // print using the current time zone
+        printClassAndFunc(info: "testDate= \(testDate.ddMMyyyy_HHmmss), testDateUTC= \(testDateUTC.ddMMyyyy_HHmmss)")
+        // XCTAssertEqual(
+
+        // test the failable initializer
+        // good duration
+        XCTAssertEqual("\(DateInterval(startDate: testDateUTC, durationHours: 1)!)",
+                       "2020-10-25 13:00:00 +0000 to 2020-10-25 14:00:00 +0000")
+        XCTAssertEqual("\(DateInterval(startDate: testDateUTC, durationHours: 1)!.brief)",
+                       "25.10.2020 14:00:00 to 25.10.2020 15:00:00")
+
+        // bad duration
+        XCTAssertNil(DateInterval(startDate: testDateUTC, durationHours: 0))
+        XCTAssertNil(DateInterval(startDate: testDateUTC, durationHours: -30))
+    }
+
     func test_DateIntervalExtensions() {
         let calendar = Calendar.current
         let refDate = calendar.date(from: DateComponents(calendar: calendar, year: 2020, month: 1, day: 28, hour: 14))!
