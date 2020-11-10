@@ -19,8 +19,11 @@ jobs:
     - name: echo $GITHUB_SHA
       run: echo $GITHUB_SHA
 
-    - name: git fetch
-      run: git fetch
+    - name: git fetch --all
+      run: git fetch --all
+
+    - name: git log -1 --oneline 
+      run: git log -1 --oneline
 
     - name: git checkout gh-pages
       run: git checkout gh-pages
