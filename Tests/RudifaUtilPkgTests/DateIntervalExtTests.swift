@@ -77,6 +77,20 @@ class DateIntervalExtTests: XCTestCase {
         XCTAssertTrue(intervalD_1_00_to_2_00.partiallyOverlaps(with: intervalC_0_30_to_1_30))
         XCTAssertTrue(intervalD_1_00_to_2_00.partiallyOverlaps(with: intervalD_1_00_to_2_00))
     }
+    static let dint = DateInterval(startDate: Date(), durationHours: 3)
+
+    func test_DateIntervalExt_2() {
+        let calendar = Calendar.current
+        let refDate1 = calendar.date(from: DateComponents(calendar: calendar, year: 2019, month: 9, day: 13, hour: 15))!
+
+        // test the failable initializer
+        // good duration
+        XCTAssertEqual("\(DateInterval(startDate: refDate1, durationHours: 1)!)",
+                       "2019-09-13 13:00:00 +0000 to 2019-09-13 14:00:00 +0000")
+        // bad duration
+        XCTAssertNil(DateInterval(startDate: refDate1, durationHours: 0))
+        XCTAssertNil(DateInterval(startDate: refDate1, durationHours: -30))
+    }
 
     func test_DateIntervalExtensions() {
         let calendar = Calendar.current
