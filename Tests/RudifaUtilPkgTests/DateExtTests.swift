@@ -62,25 +62,36 @@ class DateExtTests: XCTestCase {
         print("--- time=", date, "HHmmss=", date.HHmmss)
         print("--- Today \(date.EEEEddMMyyyy) at \(date.HHmmss) tag= \(date.timeTag)")
 
-        // set an arbitrary date
-        let date0 = Date(timeIntervalSince1970: -1_006_344_000)
-        let secondsFromUTC = TimeZone.current.secondsFromGMT(for: date0)
-        // get the corresponding date-time in UTC
-        // so that the following tests become independent of the current time zone where tests are executed
-        let date0UTC = date0.addingTimeInterval(-TimeInterval(secondsFromUTC))
-        XCTAssertEqual("10.02.1938", date0UTC.ddMMyyyy)
-        XCTAssertEqual("12:00:00", date0UTC.HHmmss)
-        XCTAssertEqual("12:00:00.000", date0UTC.HHmmssSSS)
-        XCTAssertEqual("February 1938", date0UTC.MMMM_yyyy)
-        print("--- Once upon a time", date0UTC.ddMMyyyy, "at", date0.HHmmss, "...")
+        do {
+            // set an arbitrary date
+            let testDate = Date(timeIntervalSince1970: -1_006_344_000)
+            let secondsFromUTC = TimeZone.current.secondsFromGMT(for: testDate)
+            // get the corresponding date-time in UTC
+            // so that the following tests become independent of the current time zone where tests are executed
+            let testDateUTC = testDate.addingTimeInterval(-TimeInterval(secondsFromUTC))
+            XCTAssertEqual("10.02.1938", testDateUTC.ddMMyyyy)
+            XCTAssertEqual("12:00:00", testDateUTC.HHmmss)
+            XCTAssertEqual("12:00:00.000", testDateUTC.HHmmssSSS)
+            XCTAssertEqual("February 1938", testDateUTC.MMMM_yyyy)
+            print("--- Once upon a time", testDateUTC.ddMMyyyy, "at", testDate.HHmmss, "...")
 
-        // test more extended formats
-        XCTAssertEqual("12:00:00", date0UTC.HHmmss)
-        XCTAssertEqual("12:00", date0UTC.HHmm)
-        XCTAssertEqual("10.02.1938 12:00:00", date0UTC.ddMMyyyy_HHmmss)
-        XCTAssertEqual("10.02.1938 12:00", date0UTC.ddMMyyyy_HHmm)
-        XCTAssertEqual("Thursday 10.02.1938 12:00:00", date0UTC.EEEE_ddMMyyyy_HHmmss)
-        XCTAssertEqual("Thursday 10.02.1938 12:00", date0UTC.EEEE_ddMMyyyy_HHmm)
+            // test more extended formats
+            XCTAssertEqual("12:00:00", testDateUTC.HHmmss)
+            XCTAssertEqual("12:00", testDateUTC.HHmm)
+            XCTAssertEqual("10.02.1938 12:00:00", testDateUTC.ddMMyyyy_HHmmss)
+            XCTAssertEqual("10.02.1938 12:00", testDateUTC.ddMMyyyy_HHmm)
+            XCTAssertEqual("Thursday 10.02.1938 12:00:00", testDateUTC.EEEE_ddMMyyyy_HHmmss)
+            XCTAssertEqual("Thursday 10.02.1938 12:00", testDateUTC.EEEE_ddMMyyyy_HHmm)
+        }
+        do {
+            // create a test Date
+            let testDate = Date(timeIntervalSinceReferenceDate: 625_329_725.286_747)
+            let secondsFromUTC = TimeZone.current.secondsFromGMT(for: testDate)
+            let testDateUTC = testDate.addingTimeInterval(-TimeInterval(secondsFromUTC))
+
+            XCTAssertEqual(testDateUTC.ddMMyyyy_HHmmss_𝜇s, "2020-10-25 14:42:05.286747")
+            XCTAssertEqual(testDateUTC.HHmmssSSS, "14:42:05.287")
+        }
     }
 
     func testInit() {
