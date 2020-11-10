@@ -28,8 +28,8 @@ jobs:
     - name: git checkout gh-pages
       run: git checkout gh-pages
 
-    - name: git reset --hard master
-      run: git reset --hard master
+    - name: git reset --hard $GITHUB_SHA
+      run: git reset --hard $GITHUB_SHA
 
     - name: install jazzy
       run: gem install jazzy --no-document
