@@ -16,8 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: git fetch -all
-      run: git fetch -all
+    - name: git branch
+      run: git branch
+
+    - name: git fetch --all
+      run: git fetch --all
 
     - name: git checkout gh-pages
       run: git checkout gh-pages
