@@ -1,4 +1,4 @@
-name: jazzy_docs
+name: build_jazzy_docs
 
 on:
   push:
