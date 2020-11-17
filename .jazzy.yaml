@@ -1,0 +1,12 @@
+clean: true
+swift_build_tool:
+  xcodebuild
+xcodebuild_arguments:
+  - -verbose  # no effect
+  - -scheme
+  - RudifaUtilPkg
+  - -sdk
+  - iphonesimulator
+author: Rudi Farkas
+copyright: Copyright © 2019 Rudi Farkas. All rights reserved.
+min_acl: internal
