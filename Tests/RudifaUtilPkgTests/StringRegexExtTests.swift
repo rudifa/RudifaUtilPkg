@@ -71,4 +71,11 @@ class StringRegexExtTests: XCTestCase {
         XCTAssertEqual(extracted_UUID, "08D41FB1-8B2E-4F6F-977A-BFA876AEF775")
         XCTAssertNil("".extractUUID())
     }
+
+    func test_string_extractDouble() {
+        let containsANumber = #"{\"USD\":57938.29}"#
+        let extracted = containsANumber.extractDouble()
+        XCTAssertEqual(extracted, 57938.29)
+        XCTAssertNil("".extractDouble())
+    }
 }

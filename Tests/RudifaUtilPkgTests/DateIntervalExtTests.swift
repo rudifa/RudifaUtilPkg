@@ -12,7 +12,7 @@ class DateIntervalExtTests: XCTestCase {
     override func setUp() {}
     override func tearDown() {}
 
-    func test_DateIntervalExt() {
+    func test_DateIntervalExt_1() {
         let calendar = Calendar.current
         let refDate = calendar.date(from: DateComponents(calendar: calendar, year: 2020, month: 1, day: 28, hour: 14))!
         let refOneHourInterval = Calendar.current.dateInterval(of: .hour, for: refDate)!
@@ -103,7 +103,7 @@ class DateIntervalExtTests: XCTestCase {
         XCTAssertNil(DateInterval(startDate: testDateUTC, durationHours: -30))
     }
 
-    func test_DateIntervalExtensions() {
+    func test_DateIntervalExt_3() {
         let calendar = Calendar.current
         let refDate = calendar.date(from: DateComponents(calendar: calendar, year: 2020, month: 1, day: 28, hour: 14))!
 
@@ -125,6 +125,14 @@ class DateIntervalExtTests: XCTestCase {
         XCTAssertFalse(firstThreeHours.fullyOverlaps(with: halfHour))
         XCTAssertFalse(firstThreeHours.fullyOverlaps(with: fourthHour))
         XCTAssertFalse(firstThreeHours.fullyOverlaps(with: zeroHour))
+    }
+
+    func test_DateIntervalExt_4() {
+        // create a test Date
+        let testDate = Date(timeIntervalSinceReferenceDate: 625_329_725.286_747)
+
+        let twoYearInterval = DateInterval.twoYearsAround(date: testDate)
+        XCTAssertEqual(twoYearInterval.durationHours, (365 + 366) * 24)
     }
 }
 

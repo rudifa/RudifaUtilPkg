@@ -10,10 +10,10 @@ import Foundation
 
 // MARK: - Extended DateInterval properties
 
-extension DateInterval {
+public extension DateInterval {
     /// Returns true if self fully overlaps with interval
     /// - Parameter interval: interval to compare with
-    public func fullyOverlaps(with interval: DateInterval) -> Bool {
+    func fullyOverlaps(with interval: DateInterval) -> Bool {
         if let intersection = self.intersection(with: interval) {
             if intersection.duration >= min(duration, interval.duration) {
                 return true
@@ -24,7 +24,7 @@ extension DateInterval {
 
     /// Returns true if self partially overlaps with interval
     /// - Parameter interval: interval to compare with
-    public func partiallyOverlaps(with interval: DateInterval) -> Bool {
+    func partiallyOverlaps(with interval: DateInterval) -> Bool {
         if let intersection = self.intersection(with: interval) {
             if intersection.duration > 0.0 {
                 return true
@@ -34,14 +34,14 @@ extension DateInterval {
     }
 
     /// Return the duration in hours, truncated to the nearest lower integer
-    public var durationHours: Int {
+    var durationHours: Int {
         return Int(floor(duration / 3600.0))
     }
 
     /// Return seconds from hours
     /// - Parameter hours: whole hours to convert to seconds
     /// - Returns: seconds
-    static func secondsFromHours(_ hours: Int) -> TimeInterval {
+    internal static func secondsFromHours(_ hours: Int) -> TimeInterval {
         return 3600.0 * Double(hours)
     }
 
@@ -49,17 +49,26 @@ extension DateInterval {
     /// - Parameters:
     ///   - startDate: start
     ///   - durationHours: hours
-    public init?(startDate: Date, durationHours: Int = 1) {
+    init?(startDate: Date, durationHours: Int = 1) {
         guard durationHours > 0 else { return nil }
         self.init(start: startDate.wholeHour!, duration: Self.secondsFromHours(durationHours))
     }
 
+    /// Return a two-year interval around the data
+    /// - Parameter date: center of the interval
+    /// - Returns: DateInterval
+    static func twoYearsAround(date: Date) -> DateInterval {
+        let end = date.incremented(by: .year, times: 1)
+        let start = date.incremented(by: .year, times: -1)
+        return DateInterval(start: start, end: end)
+    }
+
     /// Return true if the interval is fully in the future, false otherwise
-    public var isInTheFuture: Bool {
+    var isInTheFuture: Bool {
         return start > Date()
     }
 
-    public var brief: String {
+    var brief: String {
         "\(start.ddMMyyyy_HHmmss) to \(end.ddMMyyyy_HHmmss)"
     }
 }

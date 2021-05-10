@@ -58,4 +58,34 @@ extension String {
         let matches = self.matches(for: "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}")
         return matches.first
     }
+
+    /// Return the first number found in the inputString or nil
+    ///
+    /// - Parameters:
+    ///   - inputString: expected to contain at least one substring
+    ///                  representing an integer or a fixed point double
+    ///                  example: "{\"USD\":57938.29}"
+    /// - Returns: a double or nil
+//    func doubleFrom(inputString: String) -> Double? {
+//        let matches = inputString.matches(for: "[0-9.]+")
+//        if let matches0 = matches.first, let number = Double(matches0) {
+//            return number
+//        }
+//        return nil
+//    }
+
+    /// Return the first number found in self, or nil
+    ///
+    ///  self is expected to contain at least one substring
+    ///  representing an integer or a fixed point double,
+    ///  possibly surrounded by non-numeric characters.
+    ///  Example: "{\"USD\":57938.29}"
+    public func extractDouble() -> Double? {
+        let matches = self.matches(for: "[0-9.]+")
+        if let matches0 = matches.first, let number = Double(matches0) {
+            return number
+        }
+        return nil
+    }
+
 }
