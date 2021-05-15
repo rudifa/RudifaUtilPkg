@@ -358,4 +358,12 @@ class DateExtTests: XCTestCase {
         iuTest.ymdHours.removeAll()
         XCTAssertEqual(iuTest.ymdHours, [])
     }
+
+    func test_twoYearInterval() {
+        // create a test Date
+        let testDate = Date(timeIntervalSinceReferenceDate: 625_329_725.286_747)
+
+        let twoYearInterval = testDate.twoYearsAround
+        XCTAssertEqual(twoYearInterval.durationHours, (365 + 366) * 24)
+    }
 }
