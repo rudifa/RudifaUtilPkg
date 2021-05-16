@@ -1,5 +1,5 @@
 //
-//  StringRegexExtTests.swift v.0.6.0
+//  StringRegexExtTests.swift v.0.6.1
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 28.04.18.
