@@ -25,8 +25,8 @@ jobs:
     - name: git log -1 --oneline 
       run: git log -1 --oneline
 
-    - name: git checkout gh-pages
-      run: git checkout gh-pages
+    - name: git checkout gh-pages || git checkout -b gh-pages
+      run: git checkout gh-pages || git checkout -b gh-pages
 
     - name: git reset --hard $GITHUB_SHA
       run: git reset --hard $GITHUB_SHA
