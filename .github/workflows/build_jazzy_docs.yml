@@ -43,8 +43,8 @@ jobs:
     - name: git commit -m "update jazzy docs"
       run: git commit -m "update jazzy docs"
 
-    - name: git push --force
-      run: git push --force
+    - name: git push --set-upstream origin gh-pages --force
+      run: git push --set-upstream origin gh-pages --force
  
     - name: git checkout master
       run: git checkout master
