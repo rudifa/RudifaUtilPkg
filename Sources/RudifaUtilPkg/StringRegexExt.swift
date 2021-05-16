@@ -17,7 +17,6 @@ import Foundation
 
 extension String {
     /// Returns an array of substrings in self that matched the regex pattern
-    ///
     /// - Parameter regex: pattern
     /// - Returns: [String]
     public func matches(for regex: String) -> [String] {
@@ -34,14 +33,12 @@ extension String {
     }
 
     /// Check if self is blank (is empty or consists of whitespace characters only)
-    ///
     /// - Returns: true if self is blank
     public func isBlank() -> Bool {
         return matches(for: "^\\s*$") != []
     }
 
     /// Returns true if self matches the regex pattern
-    ///
     /// - Parameter regex: pattern
     /// - Returns: Bool
     public func doesMatch(regex: String) -> Bool {
@@ -51,7 +48,6 @@ extension String {
 
 extension String {
     /// Returns UUID (if any) found in self
-    ///
     /// - Returns: String that matched the UUID pattern or nil
     /// - Example: "https://my-app/product_images%2F08D41FB1-8B2E-4F6F-977A-BFA876AEF775.png" -> "08D41FB1-8B2E-4F6F-977A-BFA876AEF775"
     public func extractUUID() -> String? {
@@ -59,23 +55,7 @@ extension String {
         return matches.first
     }
 
-    /// Return the first number found in the inputString or nil
-    ///
-    /// - Parameters:
-    ///   - inputString: expected to contain at least one substring
-    ///                  representing an integer or a fixed point double
-    ///                  example: "{\"USD\":57938.29}"
-    /// - Returns: a double or nil
-//    func doubleFrom(inputString: String) -> Double? {
-//        let matches = inputString.matches(for: "[0-9.]+")
-//        if let matches0 = matches.first, let number = Double(matches0) {
-//            return number
-//        }
-//        return nil
-//    }
-
     /// Return the first number found in self, or nil
-    ///
     ///  self is expected to contain at least one substring
     ///  representing an integer or a fixed point double,
     ///  possibly surrounded by non-numeric characters.

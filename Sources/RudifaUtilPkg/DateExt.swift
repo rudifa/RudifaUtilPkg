@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Extended Date Formats
 
-extension Date {
+public extension Date {
     /// Formats the self per format string, using TimeZone.current
     ///
     /// - Parameter fmt: a valid DateFormatter format string
@@ -25,37 +25,37 @@ extension Date {
     // computed property returns local date string
 
     /// Returns the local date string like "May 2019"
-    public var MMMM_yyyy: String {
+    var MMMM_yyyy: String {
         return formatted(fmt: "MMMM yyyy")
     }
 
     /// Returns the local date string like "18.08.2019"
-    public var ddMMyyyy: String {
+    var ddMMyyyy: String {
         return formatted(fmt: "dd.MM.yyyy")
     }
 
     /// Returns the local date string including day, like "Sunday 18.08.2019"
-    public var EEEEddMMyyyy: String {
+    var EEEEddMMyyyy: String {
         return formatted(fmt: "EEEE dd.MM.yyyy")
     }
 
     /// Returns the local time string like "20:44:23"
-    public var HHmmss: String {
+    var HHmmss: String {
         return formatted(fmt: "HH:mm:ss")
     }
 
     /// Returns the local time string like "20:44"
-    public var HHmm: String {
+    var HHmm: String {
         return formatted(fmt: "HH:mm")
     }
 
     /// Returns the local time string with milliseconds, like "12:00:00.000"
-    public var HHmmssSSS: String {
+    var HHmmssSSS: String {
         return formatted(fmt: "HH:mm:ss.SSS")
     }
 
     /// Return a dateTimeString with microsecond resolution, like "2020-10-25 15:42:05.286747"
-    public var ddMMyyyy_HHmmss_𝜇s: String {
+    var ddMMyyyy_HHmmss_𝜇s: String {
         let cal = Calendar.current
         let comps = cal.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond],
                                        from: self)
@@ -71,47 +71,47 @@ extension Date {
     /// Initializes self to the date at the specified secondsInto21stCentury
     ///
     /// - Parameter secondsInto21stCentury: seconds since 00:00:00 UTC on 1 January 2001
-    public init(seconds secondsInto21stCentury: TimeInterval) {
+    init(seconds secondsInto21stCentury: TimeInterval) {
         self.init(timeIntervalSinceReferenceDate: secondsInto21stCentury)
     }
 
     /// Returns the detailed local date-time string, like "24.07.2019 10:00:00"
-    public var ddMMyyyy_HHmmss: String {
+    var ddMMyyyy_HHmmss: String {
         return formatted(fmt: "dd.MM.yyyy HH:mm:ss")
     }
 
     /// Returns the detailed local date-time string, like "24.07.2019 10:25"
-    public var ddMMyyyy_HHmm: String {
+    var ddMMyyyy_HHmm: String {
         return formatted(fmt: "dd.MM.yyyy HH:mm")
     }
 
     /// Returns the detailed local date-time string, like "Wednesday 24.07.2019 10:00:00"
-    public var EEEE_ddMMyyyy_HHmmss: String {
+    var EEEE_ddMMyyyy_HHmmss: String {
         return formatted(fmt: "EEEE dd.MM.yyyy HH:mm:ss")
     }
 
     /// Returns the detailed local date-time string, like "Wednesday 24.07.2019 10:00"
-    public var EEEE_ddMMyyyy_HHmm: String {
+    var EEEE_ddMMyyyy_HHmm: String {
         return formatted(fmt: "EEEE dd.MM.yyyy HH:mm")
     }
 
     /// Returns the detailed local date-time string, like "Wednesday 24.07.2019 10:00:00 +02:00"
-    public var EEEE_ddMMyyyy_HHmmss_ZZZZZ: String {
+    var EEEE_ddMMyyyy_HHmmss_ZZZZZ: String {
         return formatted(fmt: "EEEE dd.MM.yyyy HH:mm:ss ZZZZZ")
     }
 
     /// Returns a timestamp (timeIntervalSince1970)
-    public var timeStamp: TimeInterval { return timeIntervalSince1970 }
+    var timeStamp: TimeInterval { return timeIntervalSince1970 }
 
     /// Returns a timestamp string (timeIntervalSince1970), like "1566153863_69661"
-    public var timeTag: String {
+    var timeTag: String {
         return String(format: "%10.5f", timeStamp).replacingOccurrences(of: ".", with: "_")
     }
 }
 
 // MARK: - Extended Date Modifiers and Properties using Calendar and DateComponents
 
-extension Date {
+public extension Date {
     // MARK: - modifiers
 
     /// Increments self by component and value
@@ -119,22 +119,22 @@ extension Date {
     /// - Parameters:
     ///   - component: a Calendar.Component like .hour, .day, .month, ...
     ///   - value: number of compoents (hous, days, months, ...)
-    public mutating func increment(by component: Calendar.Component, times value: Int = 1) {
+    mutating func increment(by component: Calendar.Component, times value: Int = 1) {
         self = Calendar.current.date(byAdding: component, value: value, to: self)!
     }
 
     /// Date incremented by component and value
-    public func incremented(by component: Calendar.Component, times value: Int = 1) -> Date {
+    func incremented(by component: Calendar.Component, times value: Int = 1) -> Date {
         return Calendar.current.date(byAdding: component, value: value, to: self)!
     }
 
     /// Increments self by 1 month
-    public mutating func nextMonth() {
+    mutating func nextMonth() {
         increment(by: .month, times: 1)
     }
 
     /// Decrements self by 1 month
-    public mutating func prevMonth() {
+    mutating func prevMonth() {
         increment(by: .month, times: -1)
     }
 
@@ -144,7 +144,7 @@ extension Date {
     ///
     /// - Parameter day: day of month (1...) to set to
     /// - Returns: modified copy of self or nil if invalid date would be generated
-    public func setting(day: Int) -> Date? {
+    func setting(day: Int) -> Date? {
         var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour], from: self)
         dateComponents.day = day
         return Calendar.current.date(from: dateComponents)
@@ -155,8 +155,8 @@ extension Date {
     /// Preserves the .hour, sets .minute and smaller components to 0
     ///
     /// - Parameter day: day of month (1...) to set to
-    public mutating func set(day: Int) {
-        if let date = self.setting(day: day) { self = date }
+    mutating func set(day: Int) {
+        if let date = setting(day: day) { self = date }
         else { print("*** set day failed") }
     }
 
@@ -166,7 +166,7 @@ extension Date {
     ///
     /// - Parameter hour: hour to set to (0...23)
     /// - Returns: modified copy of self or nil if invalid date would be generated
-    public func setting(hour: Int) -> Date? {
+    func setting(hour: Int) -> Date? {
         var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour], from: self)
         dateComponents.hour = hour
         return Calendar.current.date(from: dateComponents)
@@ -177,8 +177,8 @@ extension Date {
     /// Sets .minute and smaller components to 0
     ///
     /// - Parameter hour: hour to set to (0...23)
-    public mutating func set(hour: Int) {
-        if let date = self.setting(hour: hour) { self = date }
+    mutating func set(hour: Int) {
+        if let date = setting(hour: hour) { self = date }
         else { print("*** set hour failed") }
     }
 
@@ -189,7 +189,7 @@ extension Date {
     /// - Parameters:
     ///   - calendarComponent: one of [.year, .month, .day, .hour, .minute, .second]
     /// - Returns: modified date
-    public func whole(_ calendarComponent: Calendar.Component) -> Date? {
+    func whole(_ calendarComponent: Calendar.Component) -> Date? {
         let components: [Calendar.Component] = [.year, .month, .day, .hour, .minute, .second]
         guard let idx = components.firstIndex(of: calendarComponent) else { return nil }
         let remaining = components[...idx]
@@ -200,115 +200,123 @@ extension Date {
     /// Returns a date setting the minute, second all to 0
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
-    public var wholeHour: Date? {
+    var wholeHour: Date? {
         return whole(.hour)
     }
 
     /// Returns a date setting the hour, minute, second all to 0
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
-    public var wholeDay: Date? {
+    var wholeDay: Date? {
         return whole(.day)
     }
 
     /// Returns a date setting the day to 1, hour, minute, second all to 0
     ///
     /// - Returns: modified copy of self or nil if invalid date would be generated
-    public var wholeMonth: Date? {
+    var wholeMonth: Date? {
         return whole(.month)
     }
 
     // MARK: - properties
 
     /// Returns month (1..12)
-    public var month: Int {
+    var month: Int {
         return Calendar.current.component(.month, from: self)
     }
 
     /// Returns month (0..11)
-    public var month_0: Int {
+    var month_0: Int {
         return month - 1
     }
 
     /// Returns the start date of the month
-    public var month1st: Date {
+    var month1st: Date {
         return Calendar.current.dateInterval(of: .month, for: self)!.start
     }
 
     /// Returns the last date of the month
-    public var monthLast: Date {
+    var monthLast: Date {
         let then = Calendar.current.dateInterval(of: .month, for: self)!.end // in fact, start of next month
         return then.incremented(by: .day, times: -1)
     }
 
     /// Returns an array of days. ex. [1, 2, ..., 31]
-    public var daysInMonth: [Int] {
+    var daysInMonth: [Int] {
         return (Calendar.current.range(of: .day, in: .month, for: self)!).map({ $0 })
     }
 
     /// Returns year
-    public var year: Int {
+    var year: Int {
         return Calendar.current.component(.year, from: self)
     }
 
     /// Returns day in month (1...)
-    public var day: Int {
+    var day: Int {
         return Calendar.current.component(.day, from: self)
     }
 
     /// Returns day in month (0...)
-    public var day_0: Int {
+    var day_0: Int {
         return day - 1
     }
 
     /// Returns weekdayOrdinal (range 1...5, 1 for 1st 7 days of the month, 2 for next 7 days, etc)
-    public var weekdayOrdinal: Int {
+    var weekdayOrdinal: Int {
         return Calendar.current.component(.weekdayOrdinal, from: self)
     }
 
     /// Returns weekday (1...7, 1 is Sunday)
-    public var weekday: Int {
+    var weekday: Int {
         return Calendar.current.component(.weekday, from: self)
     }
 
     /// Returns weekday (0...6, 0 is Monday) of the first day of the month
-    public var weekday_0M: Int {
+    var weekday_0M: Int {
         return (weekday - 2 + 7) % 7
     }
 
     /// Returns weekday (1...7, 1 is Sunday) of the first day of the month
-    public var month1stWeekday: Int {
+    var month1stWeekday: Int {
         return month1st.weekday
     }
 
     /// Returns weekday (0...6, 0 is Monday) of the first day of the month
-    public var month1stWeekday_0M: Int {
+    var month1stWeekday_0M: Int {
         return month1st.weekday_0M
     }
 
     /// Returns true if self is today (any hour)
-    public var isToday: Bool {
+    var isToday: Bool {
         let dateNow = Date()
         return day == dateNow.day && month == dateNow.month && year == dateNow.year
     }
 
     /// Returns hour (0..23)
-    public var hour: Int {
+    var hour: Int {
         return Calendar.current.component(.hour, from: self)
     }
 
     /// Returns the date interval of `component` duration which contains self
     /// - Parameter component: calendar component
-    public func dateInterval(of component: Calendar.Component) -> DateInterval? {
+    func dateInterval(of component: Calendar.Component) -> DateInterval? {
         return Calendar.current.dateInterval(of: component, for: self)
+    }
+
+    /// Return the date interval of 2 years around self
+    /// - Parameter component: calendar component
+    var twoYearsAround: DateInterval {
+        let end = incremented(by: .year, times: 1)
+        let start = incremented(by: .year, times: -1)
+        return DateInterval(start: start, end: end)
     }
 }
 
 // MARK: - Extended Calendar properties
 
-extension Calendar {
+public extension Calendar {
     /// Returns array of weekday names, starting with Monday
-    public var weekdaySymbols_M0: [String] {
+    var weekdaySymbols_M0: [String] {
         var wkds = weekdaySymbols
         wkds.append(wkds.first!)
         return Array(wkds.dropFirst())
