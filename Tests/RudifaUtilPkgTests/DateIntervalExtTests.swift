@@ -1,5 +1,5 @@
 //
-//  DateIntervalExtTests.swift v.0.1.2
+//  DateIntervalExtTests.swift v.0.1.3
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 28.08.20.
