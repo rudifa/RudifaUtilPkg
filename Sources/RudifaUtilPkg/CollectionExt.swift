@@ -1,5 +1,5 @@
 //
-//  CollectionExt.swift v.0.2.0
+//  CollectionExt.swift v.0.6.0
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 24.12.19.
@@ -17,6 +17,7 @@ public extension Array where Element: Equatable {
         updated += other.filter { !self.contains($0) }
         return updated
     }
+
     /// Update array in-place to contain elements of self that are also in other, plus elements from other that are not in self
     /// - Parameter other: the array to update from
     mutating func updatePreservingOrder(from other: Array) {
@@ -72,6 +73,27 @@ public extension Array where Element: Equatable {
 }
 
 public extension Array {
+    /// Move the element at old index to new index, modifying self in-place
+    /// - Parameters:
+    ///   - old: index of the element to move
+    ///   - new: new index of the element
+    mutating func move(atIndex old: Index, toIndex new: Index) {
+        if old != new, indices.contains(old), indices.contains(new) {
+            insert(remove(at: old), at: new)
+        }
+    }
+
+    /// Move the element at old index to new index
+    /// - Parameters:
+    ///   - old: index of the element to move
+    ///   - new: new index of the element
+    /// - Returns: modified copy of self
+    func moved(atIndex old: Index, toIndex new: Index) -> [Element] {
+        var temp = self
+        temp.move(atIndex: old, toIndex: new)
+        return temp
+    }
+
     /// Move the element matching the predicate to index, modifying self in-place
     /// - Parameters:
     ///   - predicate: allows the move if true
