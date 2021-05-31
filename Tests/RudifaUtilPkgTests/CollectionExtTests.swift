@@ -1,5 +1,5 @@
 //
-//  CollectionUtilTests.swift v.0.2.0
+//  CollectionExtTests.swift v.0.6.0
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 24.12.19.
@@ -50,7 +50,7 @@ struct MockCalendar {
     let otherData = Date()
 }
 
-class CollectionUtilTests: XCTestCase {
+class CollectionExtTests: XCTestCase {
     override func setUp() {}
     override func tearDown() {}
 
@@ -191,7 +191,28 @@ class CollectionUtilTests: XCTestCase {
         }
     }
 
-    func test_move() {
+    func test_move_element_atIndex_to_index() {
+        // mutating func move(atIndex old: Index, toIndex new: Index)
+        // moves the element updating the array in-place
+
+        var array = ["A", "B", "C", "D"]
+
+        array.move(atIndex: 3, toIndex: 0); XCTAssertEqual(array, ["D", "A", "B", "C"])
+        array.move(atIndex: 0, toIndex: 1); XCTAssertEqual(array, ["A", "D", "B", "C"])
+        array.move(atIndex: 1, toIndex: 2); XCTAssertEqual(array, ["A", "B", "D", "C"])
+        array.move(atIndex: 2, toIndex: 3); XCTAssertEqual(array, ["A", "B", "C", "D"])
+        array.move(atIndex: 3, toIndex: 4); XCTAssertEqual(array, ["A", "B", "C", "D"])
+
+        array.move(atIndex: 0, toIndex: 0); XCTAssertEqual(array, ["A", "B", "C", "D"])
+        array.move(atIndex: 0, toIndex: 1); XCTAssertEqual(array, ["B", "A", "C", "D"])
+        array.move(atIndex: 1, toIndex: 2); XCTAssertEqual(array, ["B", "C", "A", "D"])
+        array.move(atIndex: 2, toIndex: 3); XCTAssertEqual(array, ["B", "C", "D", "A"])
+        array.move(atIndex: 3, toIndex: 4); XCTAssertEqual(array, ["B", "C", "D", "A"])
+
+        array.move(atIndex: 42, toIndex: 3); XCTAssertEqual(array, ["B", "C", "D", "A"])
+    }
+
+    func test_move_element_to_index() {
         // mutating func move(element: Element, to index: Index)
         // moves the element updating the array in-place
 
@@ -212,7 +233,28 @@ class CollectionUtilTests: XCTestCase {
         array.move(element: "Q", to: 3); XCTAssertEqual(array, ["B", "C", "D", "A"])
     }
 
-    func test_moved() {
+    func test_moved_element_at_to_index() {
+        // func moved(atIndex old: Index, toIndex new: Index) -> [Element]
+        // returns a copy of array, with the element moved
+
+        let array = ["A", "B", "C", "D"]
+
+        XCTAssertEqual(array.moved(atIndex: 3, toIndex: 0), ["D", "A", "B", "C"])
+        XCTAssertEqual(array.moved(atIndex: 3, toIndex: 1), ["A", "D", "B", "C"])
+        XCTAssertEqual(array.moved(atIndex: 3, toIndex: 2), ["A", "B", "D", "C"])
+        XCTAssertEqual(array.moved(atIndex: 3, toIndex: 3), ["A", "B", "C", "D"])
+        XCTAssertEqual(array.moved(atIndex: 3, toIndex: 4), ["A", "B", "C", "D"])
+
+        XCTAssertEqual(array.moved(atIndex: 0, toIndex: 0), ["A", "B", "C", "D"])
+        XCTAssertEqual(array.moved(atIndex: 0, toIndex: 1), ["B", "A", "C", "D"])
+        XCTAssertEqual(array.moved(atIndex: 0, toIndex: 2), ["B", "C", "A", "D"])
+        XCTAssertEqual(array.moved(atIndex: 0, toIndex: 3), ["B", "C", "D", "A"])
+        XCTAssertEqual(array.moved(atIndex: 0, toIndex: 4), ["A", "B", "C", "D"])
+
+        XCTAssertEqual(array.moved(atIndex: 42, toIndex: 4), ["A", "B", "C", "D"])
+    }
+
+    func test_moved_element_to_index() {
         // func moved(element: Element, to index: Index) -> [Element]
         // returns a copy of array, with the element moved
 
