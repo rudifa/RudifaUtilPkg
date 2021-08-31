@@ -16,8 +16,8 @@ class DateIntervalExtTests: XCTestCase {
         let calendar = Calendar.current
         let refDate1 = calendar.date(from: DateComponents(calendar: calendar, year: 2019, month: 9, day: 13, hour: 15))!
 
-        XCTAssertEqual("\(DateInterval(startDate: refDate1, durationHours: 1)!)",
-                       "2019-09-13 13:00:00 +0000 to 2019-09-13 14:00:00 +0000")
+        XCTAssertEqual("\(DateInterval(startDate: refDate1, durationHours: 1)!.brief)",
+                       "13.09.2019 15:00:00 to 13.09.2019 16:00:00")
         XCTAssertNil(DateInterval(startDate: refDate1, durationHours: 0))
         XCTAssertNil(DateInterval(startDate: refDate1, durationHours: -30))
     }
