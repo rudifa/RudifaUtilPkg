@@ -12,6 +12,16 @@ class DateIntervalExtTests: XCTestCase {
     override func setUp() {}
     override func tearDown() {}
 
+    func test_DateIntervalExt() {
+        let calendar = Calendar.current
+        let refDate1 = calendar.date(from: DateComponents(calendar: calendar, year: 2019, month: 9, day: 13, hour: 15))!
+
+        XCTAssertEqual("\(DateInterval(startDate: refDate1, durationHours: 1)!)",
+                       "2019-09-13 13:00:00 +0000 to 2019-09-13 14:00:00 +0000")
+        XCTAssertNil(DateInterval(startDate: refDate1, durationHours: 0))
+        XCTAssertNil(DateInterval(startDate: refDate1, durationHours: -30))
+    }
+
     func test_DateIntervalExt_1() {
         let calendar = Calendar.current
         let refDate = calendar.date(from: DateComponents(calendar: calendar, year: 2020, month: 1, day: 28, hour: 14))!
