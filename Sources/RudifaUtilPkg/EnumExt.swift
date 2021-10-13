@@ -14,10 +14,15 @@ import Foundation
  ```
     enum MyEnum: CaseIterable { case a, b, c }
     var letter = MyEnum.a
-    letter = letter.next
+    letter.next()  // .b
+    letter.next()  // .c
+    letter.next()  // .a
+    letter.next()  // .b
+    letter.next(false)  // .a
+    letter.next(false)  // .c
  ```
  */
-extension CaseIterable where Self: Equatable {
+public extension CaseIterable where Self: Equatable {
     /// Returns allCases as Array
     private var all: [Self] {
         return Array(Self.allCases)
@@ -34,22 +39,29 @@ extension CaseIterable where Self: Equatable {
     }
 
     /// Returns the next enumerated value (circular)
-    public var next: Self {
+    var next: Self {
         return all[(index + 1) % count]
     }
 
     /// Returns the previous enumerated value (circular)
-    public var prev: Self {
+    var prev: Self {
         return all[(index + count - 1) % count]
     }
 
-    /// Perform circular increment or decrement of self
-    public mutating func increment(next: Bool) {
+    /// Increments or decrements self (circular)
+    mutating func next(_ next: Bool = true) {
         self = next ? self.next : prev
     }
 
-    /// Perform circular increment or decrement of self and return it
-    public mutating func incremented(next: Bool) -> Self {
+    /// Increments or decrements self (circular)
+    @available(*, deprecated, message: "use .next(next:) instead")
+    mutating func increment(next: Bool) {
+        self = next ? self.next : prev
+    }
+
+    /// Returns an incremented or decremented copy of self (circular)
+    @available(*, deprecated, message: "use properties .next or .prev instead")
+    mutating func incremented(next: Bool) -> Self {
         increment(next: next)
         return self
     }

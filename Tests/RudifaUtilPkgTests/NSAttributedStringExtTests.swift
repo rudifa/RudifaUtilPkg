@@ -21,14 +21,18 @@ class NSAttributedStringExtTests: XCTestCase {
                                                                            (currency, .footnote)], separator: " ")
             XCTAssertEqual(pcAttributedString.string, "24.99 € / day")
             XCTAssertEqual(pcAttributedString.length, 13)
-            XCTAssertEqual(pcAttributedString.size(), CGSize(width: 95.9931640625, height: 23.8671875))
+            let size = pcAttributedString.size()
+            XCTAssertEqual(size.width.rounded(), CGFloat(96))
+            XCTAssertEqual(size.height.rounded(), CGFloat(24))
         }
         do {
             let pcAttributedString = NSAttributedString(stringsWithStyle: [(price, .title1),
                                                                            (currency, .title3)], separator: " ")
             XCTAssertEqual(pcAttributedString.string, "24.99 € / day")
             XCTAssertEqual(pcAttributedString.length, 13)
-            XCTAssertEqual(pcAttributedString.size(), CGSize(width: 137.123046875, height: 33.4140625))
+            let size = pcAttributedString.size()
+            XCTAssertEqual(size.width.rounded(), CGFloat(137))
+            XCTAssertEqual(size.height.rounded(), CGFloat(33))
         }
     }
 }
