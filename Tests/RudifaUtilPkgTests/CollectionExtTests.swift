@@ -210,6 +210,9 @@ class CollectionExtTests: XCTestCase {
         array.move(atIndex: 3, toIndex: 4); XCTAssertEqual(array, ["B", "C", "D", "A"])
 
         array.move(atIndex: 42, toIndex: 3); XCTAssertEqual(array, ["B", "C", "D", "A"])
+
+        array = []
+        array.move(atIndex: 42, toIndex: 3); XCTAssertEqual(array, [])
     }
 
     func test_move_element_to_index() {
@@ -252,6 +255,9 @@ class CollectionExtTests: XCTestCase {
         XCTAssertEqual(array.moved(atIndex: 0, toIndex: 4), ["A", "B", "C", "D"])
 
         XCTAssertEqual(array.moved(atIndex: 42, toIndex: 4), ["A", "B", "C", "D"])
+
+        let array2 = [String]()
+        XCTAssertEqual(array2.moved(atIndex: 42, toIndex: 3), [])
     }
 
     func test_moved_element_to_index() {
