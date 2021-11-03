@@ -14,12 +14,12 @@ import Foundation
  ```
     enum MyEnum: CaseIterable { case a, b, c }
     var letter = MyEnum.a
-    letter.next()  // .b
-    letter.next()  // .c
-    letter.next()  // .a
-    letter.next()  // .b
-    letter.next(false)  // .a
-    letter.next(false)  // .c
+    letter.toNext(true)  // .b
+    letter.toNext(true)  // .c
+    letter.toNext(true)  // .a
+    letter.toNext(true)  // .b
+    letter.toNext(false)  // .a
+    letter.toNext(false)  // .c
  ```
  */
 public extension CaseIterable where Self: Equatable {
@@ -38,23 +38,29 @@ public extension CaseIterable where Self: Equatable {
         return Self.allCases.count
     }
 
-    /// Returns the next enumerated value (circular)
+    /// Returns the next enumerated value (circularly)
     var next: Self {
         return all[(index + 1) % count]
     }
 
-    /// Returns the previous enumerated value (circular)
+    /// Returns the previous enumerated value (circularly)
     var prev: Self {
         return all[(index + count - 1) % count]
     }
 
-    /// Increments or decrements self (circular)
+    /// Increments or decrements self (circularly)
+    @available(*, deprecated, message: "use .toNext(next:) instead")
     mutating func next(_ next: Bool = true) {
         self = next ? self.next : prev
     }
 
+    /// Increments or decrements self (circularly)
+    mutating func toNext(_ next: Bool) {
+        self = next ? self.next : prev
+    }
+
     /// Increments or decrements self (circular)
-    @available(*, deprecated, message: "use .next(next:) instead")
+    @available(*, deprecated, message: "use .toNext(next:) instead")
     mutating func increment(next: Bool) {
         self = next ? self.next : prev
     }
