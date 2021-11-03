@@ -17,8 +17,9 @@ class EnumExtTests: XCTestCase {
         case north, east, south, west
     }
 
+    @available(*, deprecated) // silence warnings
     func test_func_next() {
-        // func next() modifies the value forwards (or backwards)
+        // func next() modifies the value forwards (or backwards) circularly
         enum MyEnum: CaseIterable { case a, b, c }
         var letter = MyEnum.a; XCTAssertEqual(letter, .a)
         letter.next(); XCTAssertEqual(letter, .b)
@@ -31,8 +32,9 @@ class EnumExtTests: XCTestCase {
         letter.next(false); XCTAssertEqual(letter, .a)
     }
 
+    @available(*, deprecated) // silence warnings
     func test_func_next_2() {
-        // func next() modifies the value forwards (or backwards)
+        // func next() modifies the value forwards (or backwards) circularly
         var side = Windrose.north; XCTAssertEqual(side, .north)
         side.next(); XCTAssertEqual(side, .east)
         side.next(true); XCTAssertEqual(side, .south)
@@ -45,6 +47,36 @@ class EnumExtTests: XCTestCase {
         side.next(false); XCTAssertEqual(side, .south)
         side.next(false); XCTAssertEqual(side, .east)
         side.next(false); XCTAssertEqual(side, .north)
+    }
+
+    func test_func_toNext() {
+        // func toNext() modifies the value forwards (or backwards) circularly
+        enum MyEnum: CaseIterable { case a, b, c }
+        var letter = MyEnum.a; XCTAssertEqual(letter, .a)
+        letter.toNext(true); XCTAssertEqual(letter, .b)
+        letter.toNext(true); XCTAssertEqual(letter, .c)
+        letter.toNext(true); XCTAssertEqual(letter, .a)
+        letter.toNext(true); XCTAssertEqual(letter, .b)
+        letter.toNext(false); XCTAssertEqual(letter, .a)
+        letter.toNext(false); XCTAssertEqual(letter, .c)
+        letter.toNext(false); XCTAssertEqual(letter, .b)
+        letter.toNext(false); XCTAssertEqual(letter, .a)
+    }
+
+    func test_func_toNext2() {
+        // func toNext() modifies the value forwards (or backwards) circularly
+        var side = Windrose.north; XCTAssertEqual(side, .north)
+        side.toNext(true); XCTAssertEqual(side, .east)
+        side.toNext(true); XCTAssertEqual(side, .south)
+        side.toNext(true); XCTAssertEqual(side, .west)
+        side.toNext(true); XCTAssertEqual(side, .north)
+        side.toNext(true); XCTAssertEqual(side, .east)
+
+        side.toNext(false); XCTAssertEqual(side, .north)
+        side.toNext(false); XCTAssertEqual(side, .west)
+        side.toNext(false); XCTAssertEqual(side, .south)
+        side.toNext(false); XCTAssertEqual(side, .east)
+        side.toNext(false); XCTAssertEqual(side, .north)
     }
 
     func test_property_next() {
@@ -67,6 +99,7 @@ class EnumExtTests: XCTestCase {
         side = side.prev; XCTAssertEqual(side, .west)
     }
 
+    @available(*, deprecated) // silence warnings
     func test_enum_one_case() {
         enum MyEnum0 {} // no cases - cannot create a variable
 
@@ -75,13 +108,14 @@ class EnumExtTests: XCTestCase {
         }
 
         var val = MyEnum1.oneAndOnly; XCTAssertEqual(val, .oneAndOnly)
-        val.next(); XCTAssertEqual(val, .oneAndOnly)
-        val.next(false); XCTAssertEqual(val, .oneAndOnly)
+        val.toNext(true); XCTAssertEqual(val, .oneAndOnly)
+        val.toNext(false); XCTAssertEqual(val, .oneAndOnly)
 
         XCTAssertEqual(val.next, .oneAndOnly)
         XCTAssertEqual(val.prev, .oneAndOnly)
     }
 
+    @available(*, deprecated) // silence warnings
     func test_enum_increment() {
         var side = Windrose.north
         XCTAssertEqual(side, .north)
@@ -99,6 +133,7 @@ class EnumExtTests: XCTestCase {
         side.increment(next: false); XCTAssertEqual(side, .west)
     }
 
+    @available(*, deprecated) // silence warnings
     func test_enum_incremented() {
         var side = Windrose.north; XCTAssertEqual(side, .north)
 
