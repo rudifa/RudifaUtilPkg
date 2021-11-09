@@ -9,6 +9,15 @@
 import UIKit
 
 extension NSAttributedString {
+    /// Initialize from a string using the fgColor
+    /// - Parameters:
+    ///   - string: input string
+    ///   - color: foreground color
+    public convenience init(string: String, fgColor: UIColor) {
+        let attributes = [NSAttributedString.Key.foregroundColor: fgColor]
+        self.init(string: string, attributes: attributes)
+    }
+
     /// Initialize from a string using the textStyle
     /// - Parameters:
     ///   - string: input string
@@ -16,6 +25,15 @@ extension NSAttributedString {
     public convenience init(string: String, textStyle: UIFont.TextStyle) {
         let attributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: textStyle)]
         self.init(string: string, attributes: attributes)
+    }
+
+    /// Initialize from an array of strings with color, joining with the separator
+    /// - Parameters:
+    ///   - stringsWithStyle: array of tuples (string, color)
+    ///   - separator: string
+    public convenience init(stringsWithColor: [(String, UIColor)], separator: String = " ") {
+        let nsaStrings = stringsWithColor.map { NSAttributedString(string: $0.0, fgColor: $0.1) }
+        self.init(from: nsaStrings, separator: separator)
     }
 
     /// Initialize from an array of strings with styles, joining with the separator
@@ -26,7 +44,6 @@ extension NSAttributedString {
         let nsaStrings = stringsWithStyle.map { NSAttributedString(string: $0.0, textStyle: $0.1) }
         self.init(from: nsaStrings, separator: separator)
     }
-
     /// Initialize from an array of NSAttributedString, joining with the separator
     /// - Parameters:
     ///   - nsaStrings: array of attributes strings
