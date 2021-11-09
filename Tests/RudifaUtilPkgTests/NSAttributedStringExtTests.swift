@@ -33,6 +33,23 @@ class NSAttributedStringExtTests: XCTestCase {
             let size = pcAttributedString.size()
             XCTAssertEqual(size.width.rounded(), CGFloat(137))
             XCTAssertEqual(size.height.rounded(), CGFloat(33))
+            print("pcAttributedString.className= \(pcAttributedString.className)")
+            print("pcAttributedString= \(pcAttributedString)")
+        }
+
+        do {
+            let blueString = NSAttributedString(string: "BLUE", fgColor: .blue)
+            print("coloredString= \(blueString)")
+            print("coloredString.className= \(blueString.className)")
+        }
+
+        do {
+            let coloredString2 = NSAttributedString(stringsWithColor: [
+                ("BLUE", .blue),
+                ("RED", .red),
+            ])
+            print("coloredString2= \(coloredString2)")
+            print("coloredString2.className= \(coloredString2.className)")
         }
     }
 }
