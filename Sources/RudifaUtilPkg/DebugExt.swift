@@ -58,9 +58,25 @@ extension NSObject {
     /// - Parameters:
     ///  - info: information string; a leading "@" will be replaced by the call date
     ///  - fnc: current function (default value is the caller)
+    @available(*, deprecated, message: "use printClassAndFunc(\"...\" instead")
     public func printClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) {
         #if DEBUG
             print(formatClassAndFunc(info: inf_, fnc: fnc_))
+        #endif
+    }
+
+    /// Print to stdout current class and function names and optional info
+    ///
+    /// - Note: Printing is enabled by DEBUG constant which is normally absent from release builds.
+    ///
+    /// - Requires: to be called from a subclass of NSObject
+    ///
+    /// - Parameters:
+    ///  - _: information string; a leading "@" will be replaced by the call date
+    ///  - fnc: current function (default value is the caller)
+    public func printClassAndFunc(_ info: String = "", fnc fnc_: String = #function) {
+        #if DEBUG
+            print(formatClassAndFunc(info: info, fnc: fnc_))
         #endif
     }
 
