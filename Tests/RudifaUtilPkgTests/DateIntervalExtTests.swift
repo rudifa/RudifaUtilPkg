@@ -100,7 +100,7 @@ class DateIntervalExtTests: XCTestCase {
         XCTAssertEqual(testDateUTC.HHmmssSSS, "14:42:05.287")
 
         // print using the current time zone
-        printClassAndFunc(info: "testDate= \(testDate.ddMMyyyy_HHmmss), testDateUTC= \(testDateUTC.ddMMyyyy_HHmmss)")
+        printClassAndFunc("testDate= \(testDate.ddMMyyyy_HHmmss), testDateUTC= \(testDateUTC.ddMMyyyy_HHmmss)")
         // XCTAssertEqual(
 
         // test the failable initializer
@@ -170,41 +170,41 @@ class DateIntervalTests: XCTestCase {
 
         let startInThreeQuartersOfHour = DateInterval(start: thisHour.start + oneHour * 0.75, duration: oneHour / 2)
 
-        printClassAndFunc(info: "today \(format(interval: today))")
-        printClassAndFunc(info: "thisHour \(format(interval: thisHour))")
-        printClassAndFunc(info: "theseThreeHours \(format(interval: theseThreeHours))")
-        printClassAndFunc(info: "nextHour \(format(interval: nextHour))")
-        printClassAndFunc(info: "tomorrow \(format(interval: tomorrow))")
-        printClassAndFunc(info: "startInThreeQuartersOfHour \(format(interval: startInThreeQuartersOfHour))")
+        printClassAndFunc("today \(format(interval: today))")
+        printClassAndFunc("thisHour \(format(interval: thisHour))")
+        printClassAndFunc("theseThreeHours \(format(interval: theseThreeHours))")
+        printClassAndFunc("nextHour \(format(interval: nextHour))")
+        printClassAndFunc("tomorrow \(format(interval: tomorrow))")
+        printClassAndFunc("startInThreeQuartersOfHour \(format(interval: startInThreeQuartersOfHour))")
 
         let intersection1 = thisHour.intersection(with: thisHour)!
         dateIntervalFormatter.string(from: intersection1)
-        printClassAndFunc(info: "thisHour.intersection(with: thisHour) \(format(interval: intersection1))]")
-        printClassAndFunc(info: "thisHour.intersects(thisHour) \(thisHour.intersects(thisHour))")
+        printClassAndFunc("thisHour.intersection(with: thisHour) \(format(interval: intersection1))]")
+        printClassAndFunc("thisHour.intersects(thisHour) \(thisHour.intersects(thisHour))")
 
         let intersection2 = thisHour.intersection(with: nextHour)!
         dateIntervalFormatter.string(from: intersection2)
-        printClassAndFunc(info: "thisHour.intersection(nextHour) \(dateIntervalFormatter.string(from: intersection2)!) [\(intersection2.duration)]")
-        printClassAndFunc(info: "thisHour.intersects(nextHour) \(thisHour.intersects(nextHour))")
+        printClassAndFunc("thisHour.intersection(nextHour) \(dateIntervalFormatter.string(from: intersection2)!) [\(intersection2.duration)]")
+        printClassAndFunc("thisHour.intersects(nextHour) \(thisHour.intersects(nextHour))")
 
         let intersection3 = thisHour.intersection(with: startInThreeQuartersOfHour)!
         dateIntervalFormatter.string(from: intersection3)
-        printClassAndFunc(info: "thisHour.intersection(with: startInThreeQuartersOfHour) \(format(interval: intersection3))]")
-        printClassAndFunc(info: "thisHour.intersects(startInThreeQuartersOfHour) \(thisHour.intersects(startInThreeQuartersOfHour))")
+        printClassAndFunc("thisHour.intersection(with: startInThreeQuartersOfHour) \(format(interval: intersection3))]")
+        printClassAndFunc("thisHour.intersects(startInThreeQuartersOfHour) \(thisHour.intersects(startInThreeQuartersOfHour))")
 
         let intersection4 = thisHour.intersection(with: today)!
         dateIntervalFormatter.string(from: intersection4)
-        printClassAndFunc(info: "thisHour.intersection(with: today) \(format(interval: intersection4))]")
-        printClassAndFunc(info: "thisHour.intersects(today) \(thisHour.intersects(today))")
+        printClassAndFunc("thisHour.intersection(with: today) \(format(interval: intersection4))]")
+        printClassAndFunc("thisHour.intersects(today) \(thisHour.intersects(today))")
 
         if let intersection5 = thisHour.intersection(with: tomorrow) {
-            printClassAndFunc(info: "thisHour.intersection(with: tomorrow) \(format(interval: intersection5))]")
+            printClassAndFunc("thisHour.intersection(with: tomorrow) \(format(interval: intersection5))]")
         } else {
-            printClassAndFunc(info: "thisHour.intersection(tomorrow) == nil")
+            printClassAndFunc("thisHour.intersection(tomorrow) == nil")
         }
-        printClassAndFunc(info: "thisHour.intersects(tomorrow) \(thisHour.intersects(tomorrow))")
+        printClassAndFunc("thisHour.intersects(tomorrow) \(thisHour.intersects(tomorrow))")
 
         let intersection6 = thisHour.intersection(with: theseThreeHours)!
-        printClassAndFunc(info: "thisHour.intersection(with: theseThreeHours) \(format(interval: intersection6))]")
+        printClassAndFunc("thisHour.intersection(with: theseThreeHours) \(format(interval: intersection6))]")
     }
 }

@@ -95,7 +95,7 @@ class CollectionExtTests: XCTestCase {
         var calendarDataArray = [MockCalendarData(title: "Newbie", hidden: false),
                                  MockCalendarData(title: "Oldie", hidden: true)]
 
-        printClassAndFunc(info: "original calendarDataArray= \(calendarDataArray.map { $0.string })")
+        printClassAndFunc("original calendarDataArray= \(calendarDataArray.map { $0.string })")
 
         let incomingCalendars = [MockCalendar(title: "Newbie"),
                                  MockCalendar(title: "Oldie"),
@@ -107,7 +107,7 @@ class CollectionExtTests: XCTestCase {
 
         let updatedCalendarDataArray = calendarDataArray.updatedPreservingOrder(from: incomingCalendarDataArray)
 
-        printClassAndFunc(info: "updated calendarDataArray= \(calendarDataArray.map { $0.string })")
+        printClassAndFunc("updated calendarDataArray= \(calendarDataArray.map { $0.string })")
         XCTAssertEqual(updatedCalendarDataArray.map { $0.string }, expectedResultStringArray)
 
         calendarDataArray.updatePreservingOrder(from: incomingCalendarDataArray)
@@ -151,7 +151,7 @@ class CollectionExtTests: XCTestCase {
             let updatedCalendarDataArray = calendarDataArray.updatedPreservingOrder(from: incomingCalendarDataArray,
                                                                                     predicate: sameTitle)
 
-            printClassAndFunc(info: "updatedCalendarDataArray= \(updatedCalendarDataArray.map { $0.string })")
+            printClassAndFunc("updatedCalendarDataArray= \(updatedCalendarDataArray.map { $0.string })")
             XCTAssertEqual(updatedCalendarDataArray.map { $0.string }, expectedResultStringArray)
 
             var localCopy = calendarDataArray
@@ -166,7 +166,7 @@ class CollectionExtTests: XCTestCase {
             let updatedCalendarDataArray = calendarDataArray.updatedPreservingOrder(from: incomingCalendarDataArray,
                                                                                     predicate: { (elt1, elt2) -> Bool in elt1.title == elt2.title })
 
-            printClassAndFunc(info: "updatedCalendarDataArray= \(updatedCalendarDataArray.map { $0.string })")
+            printClassAndFunc("updatedCalendarDataArray= \(updatedCalendarDataArray.map { $0.string })")
             XCTAssertEqual(updatedCalendarDataArray.map { $0.string }, expectedResultStringArray)
 
             var localCopy = calendarDataArray
@@ -181,7 +181,7 @@ class CollectionExtTests: XCTestCase {
             let updatedCalendarDataArray = calendarDataArray.updatedPreservingOrder(from: incomingCalendarDataArray,
                                                                                     predicate: MockCalendarData.sameTitle)
 
-            printClassAndFunc(info: "updatedCalendarDataArray= \(updatedCalendarDataArray.map { $0.string })")
+            printClassAndFunc("updatedCalendarDataArray= \(updatedCalendarDataArray.map { $0.string })")
             XCTAssertEqual(updatedCalendarDataArray.map { $0.string }, expectedResultStringArray)
 
             var localCopy = calendarDataArray

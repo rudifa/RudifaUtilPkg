@@ -9,10 +9,15 @@
 import XCTest
 
 class DebugExtTests: XCTestCase {
+    @available(*, deprecated) // silence warnings
     func test_printClassAndFunc() {
         printClassAndFunc(info: "more info")
         printClassAndFunc(info: "@ even more info at this time")
         printClassAndFunc(info: "@ even more info a tad later")
+
+        printClassAndFunc("more info")
+        printClassAndFunc("@ even more info at this time")
+        printClassAndFunc("@ even more info a tad later")
 
         XCTAssertEqual(formatClassAndFunc(info: "more info"),
                        "---- DebugExtTests.test_printClassAndFunc() more info")
