@@ -14,9 +14,9 @@ import Foundation
 ///
 /// `print("any info")`
 ///
-/// `printClassAndFunc(info: "any info")  // ---- ViewController.viewDidLoad() any info`
+/// `printClassAndFunc("any info")  // ---- ViewController.viewDidLoad() any info`
 ///
-/// `printClassAndFunc(info: "@any info") // ---- 2019-12-07 18:05:39.117525 ViewController.viewDidLoad() any info`
+/// `printClassAndFunc("@any info") // ---- 2019-12-07 18:05:39.117525 ViewController.viewDidLoad() any info`
 ///
 /// Log to the app's logfile "Log.txt"
 ///
