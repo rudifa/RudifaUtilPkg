@@ -80,6 +80,19 @@ extension NSObject {
         #endif
     }
 
+    /// Print to stdout current class and function names and optional info
+    ///
+    /// - Note: This third form is only needed to make the call printClassAndFunc() unambigous
+    ///         when both above forms are present in the code.
+    ///
+    /// - TODO: remove when the above deprecated form is removed
+    ///
+    public func printClassAndFunc(_fnc fnc_: String = #function) {
+        #if DEBUG
+            print(formatClassAndFunc(info: "", fnc: fnc_))
+        #endif
+    }
+
     /// Print to log file current class and function names and optional info
     ///
     /// - Requires: to be called from a subclass of NSObject

@@ -15,6 +15,8 @@ class DebugExtTests: XCTestCase {
         printClassAndFunc(info: "@ even more info at this time")
         printClassAndFunc(info: "@ even more info a tad later")
 
+        printClassAndFunc()
+        printClassAndFunc("")
         printClassAndFunc("more info")
         printClassAndFunc("@ even more info at this time")
         printClassAndFunc("@ even more info a tad later")
