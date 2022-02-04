@@ -35,4 +35,10 @@ class StringExtTests: XCTestCase {
         let string = "camelCaseSplit"
         print("---- |\(string)| |\(string.camelCaseSplit)|")
     }
+
+    func test_localize() {
+        let someText = "Hello all"
+        let localized = someText.localized()
+        XCTAssertEqual(localized, "**Hello all**") // did not find any localization tables
+    }
 }

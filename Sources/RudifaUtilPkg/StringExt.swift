@@ -31,3 +31,14 @@ extension String {
         return newString
     }
 }
+
+extension String {
+    /// Localizes a text string
+    /// - Parameters:
+    ///   - _: bundle
+    ///   - tableName: table
+    /// - Returns: localized version of self (if self found in localization tables as a key)
+    public func localized(bundle _: Bundle = .main, tableName: String = "Localizable") -> String {
+        return NSLocalizedString(self, tableName: tableName, value: "**\(self)**", comment: "")
+    }
+}
