@@ -7,6 +7,11 @@ xcodebuild_arguments:
   - RudifaUtilPkg
   - -sdk
   - iphonesimulator
+  - -destination
+  - 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest'
 author: Rudi Farkas
 copyright: Copyright © 2019 Rudi Farkas. All rights reserved.
 min_acl: internal
+
+# from build_and_test.xml
+#       run: xcodebuild test -scheme RudifaUtilPkg -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest' -verbose
