@@ -1,5 +1,5 @@
 //
-//  StringRegexExt.swift v.0.6.1
+//  RegexExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 28.04.18.

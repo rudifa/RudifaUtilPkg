@@ -1,5 +1,5 @@
 //
-//  StringRegexExtTests.swift v.0.6.1
+//  RegexExtTests.swift
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 28.04.18.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class StringRegexExtTests: XCTestCase {
+class RegexExtTests: XCTestCase {
     override func setUp() {}
 
     override func tearDown() {}
