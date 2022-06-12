@@ -68,11 +68,33 @@ public extension Date {
         return formatted
     }
 
+    /// Returns the ISO8601 string representation of self (UTC timezone)
+    var iso8601UTC: String {
+        let formatter = ISO8601DateFormatter()
+        return formatter.string(from: self)
+    }
+
+    /// Returns the ISO8601 string representation of self (local timezone)
+    var iso8601Local: String {
+        let formatter = ISO8601DateFormatter()
+        formatter.timeZone = .current
+        return formatter.string(from: self)
+    }
+
     /// Initializes self to the date at the specified secondsInto21stCentury
-    ///
     /// - Parameter secondsInto21stCentury: seconds since 00:00:00 UTC on 1 January 2001
     init(seconds secondsInto21stCentury: TimeInterval) {
         self.init(timeIntervalSinceReferenceDate: secondsInto21stCentury)
+    }
+
+    /// Initializes self to the date specified in the ISO8601 string
+    /// - Parameter fromISO8601String:like "2018-04-20T14:20:00-07:00"
+    init?(iso8601String: String) {
+        let formatter = ISO8601DateFormatter()
+        guard let date = formatter.date(from: iso8601String) else {
+            return nil
+        }
+        self = date
     }
 
     /// Returns the detailed local date-time string, like "24.07.2019 10:00:00"
