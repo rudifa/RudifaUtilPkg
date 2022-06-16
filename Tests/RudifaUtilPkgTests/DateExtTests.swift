@@ -100,6 +100,23 @@ class DateExtTests: XCTestCase {
         XCTAssertEqual(date.ddMMyyyy, "01.01.2001")
     }
 
+    func test_ISO8601Format() {
+        // string to date
+        let string = "2018-04-20T14:20:00-07:00"
+        guard let date = Date(iso8601String: string) else {
+            XCTFail()
+            return
+        }
+        XCTAssertEqual(date, Date(timeIntervalSince1970: 1_524_259_200.0))
+
+        // date to string
+        let string2 = date.iso8601UTC
+        XCTAssertEqual(string2, "2018-04-20T21:20:00Z")
+
+        let string3 = date.iso8601Local
+        printClassAndFunc("\(string2) \(string3)")
+    }
+
     func testTimeStampAndTag() {
         let date = Date(seconds: 0)
         XCTAssertEqual(date.timeStamp, 978_307_200.0)
