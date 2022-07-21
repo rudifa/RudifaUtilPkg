@@ -12,21 +12,50 @@ import Foundation
 
 public extension Date {
     /// Formats the self per format string, using TimeZone.current
-    ///
     /// - Parameter fmt: a valid DateFormatter format string
     /// - Returns: date+time string
-    private func formatted(fmt: String) -> String {
+
+    /// Format the self per format string, using TimeZone.current
+    /// - Parameters:
+    ///   - fmt: a valid DateFormatter format string
+    ///   - locale: a valid locale identifier (defaults to current locale)
+    /// - Returns: date+time string
+    func formatted(fmt: String, locale: Locale? = nil) -> String {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current // the default is UTC
+        if let locale = locale {
+            formatter.locale = locale // the default is system locale
+        }
         formatter.dateFormat = fmt
         return formatter.string(from: self)
     }
 
-    // computed property returns local date string
+    // MARK: computed properties, return local date strings
 
     /// Returns the local date string like "May 2019"
+    /// Deprecated,
+    /// because in slavonic languages it uses the month name in the genitive case
+    /// e.g. hr: "veljače 2022", pl: "lutego 2022", ru: "февраля 2022"
+    /// however, in this situation the nominative case would be appropriate
+    @available(*, deprecated, message: "use LLLL_yyyy instead")
     var MMMM_yyyy: String {
         return formatted(fmt: "MMMM yyyy")
+    }
+
+    /// Returns the local date string like "February 2022"
+    /// In slavonic languages, uses the month name in the nominative case
+    /// as appropriate in this situation
+    /// e.g. hr: "veljača 2022", pl: "luty 2022", ru: "февраль 2022"
+    var LLLL_yyyy: String {
+        return formatted(fmt: "LLLL yyyy")
+    }
+
+    /// Returns the local date string like "10 February 2022"
+    /// In slavonic languages, uses the month name in the genitive case
+    /// e.g. hr: "10 veljače 2022", pl: "10 lutego 2022", ru: "10 февраля 2022"
+    /// as appropriate in this situation
+    var dd_MMMM_yyyy: String {
+        return formatted(fmt: "dd MMMM yyyy")
     }
 
     /// Returns the local date string like "18.08.2019"
@@ -54,7 +83,7 @@ public extension Date {
         return formatted(fmt: "HH:mm:ss.SSS")
     }
 
-    /// Return a dateTimeString with microsecond resolution, like "2020-10-25 15:42:05.286747"
+    /// Returns a dateTimeString with microsecond resolution, like "2020-10-25 15:42:05.286747"
     var ddMMyyyy_HHmmss_𝜇s: String {
         let cal = Calendar.current
         let comps = cal.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond],

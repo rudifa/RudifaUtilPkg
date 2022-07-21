@@ -56,6 +56,7 @@ class DateExtTests: XCTestCase {
         XCTAssertEqual(weekdaySymbols_M0, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
     }
 
+    @available(*, deprecated) // silence warnings re MMMM_yyyy
     func test_ExtendedDateFormats() {
         let date = Date()
         print("--- date=", date, "ddMMyyy=", date.ddMMyyyy)
@@ -382,5 +383,57 @@ class DateExtTests: XCTestCase {
 
         let twoYearInterval = testDate.twoYearsAround
         XCTAssertEqual(twoYearInterval.durationHours, (365 + 366) * 24)
+    }
+
+    @available(*, deprecated) // silence warnings re MMMM_yyyy
+    func test_formatted_with_locale() {
+        // set an arbitrary date
+        let testDate = Date(timeIntervalSince1970: -1_006_344_000)
+        let secondsFromUTC = TimeZone.current.secondsFromGMT(for: testDate)
+        // get the corresponding date-time in UTC
+        // so that the following tests become independent of the current time zone where tests are executed
+        let testDateUTC = testDate.addingTimeInterval(-TimeInterval(secondsFromUTC))
+
+        // MARK: test formats involving month names
+
+        do {
+            // <month> <year>
+
+            XCTAssertEqual("February 1938", testDateUTC.MMMM_yyyy)
+
+            // in slavonic languages, "MMMM" produces the genitive form of the month names
+            // which is NOT SUITABLE for the <month> <year> forms
+            XCTAssertEqual("veljače 1938", testDateUTC.formatted(fmt: "MMMM yyyy", locale: Locale(identifier: "hr_HR")))
+            XCTAssertEqual("lutego 1938", testDateUTC.formatted(fmt: "MMMM yyyy", locale: Locale(identifier: "pl_PL")))
+            XCTAssertEqual("февраля 1938", testDateUTC.formatted(fmt: "MMMM yyyy", locale: Locale(identifier: "ru_RU")))
+            XCTAssertEqual("February 1938", testDateUTC.formatted(fmt: "MMMM yyyy", locale: Locale(identifier: "en_US")))
+            XCTAssertEqual("février 1938", testDateUTC.formatted(fmt: "MMMM yyyy", locale: Locale(identifier: "fr_CH")))
+        }
+        do {
+            // <day> <month> <year>
+
+            XCTAssertEqual("10 February 1938", testDateUTC.dd_MMMM_yyyy)
+
+            // in slavonic languages, "MMMM" produces the genitive form of the month names
+            // the genitive form is SUITABLE for full dates <day> <month> <year>
+            XCTAssertEqual("10 veljače 1938", testDateUTC.formatted(fmt: "dd MMMM yyyy", locale: Locale(identifier: "hr_HR")))
+            XCTAssertEqual("10 lutego 1938", testDateUTC.formatted(fmt: "dd MMMM yyyy", locale: Locale(identifier: "pl_PL")))
+            XCTAssertEqual("10 февраля 1938", testDateUTC.formatted(fmt: "dd MMMM yyyy", locale: Locale(identifier: "ru_RU")))
+            XCTAssertEqual("10 February 1938", testDateUTC.formatted(fmt: "dd MMMM yyyy", locale: Locale(identifier: "en_US")))
+            XCTAssertEqual("10 février 1938", testDateUTC.formatted(fmt: "dd MMMM yyyy", locale: Locale(identifier: "fr_CH")))
+        }
+        do {
+            // <month> <year>
+
+            XCTAssertEqual("February 1938", testDateUTC.LLLL_yyyy)
+
+            // the nominative form of the month names is obtained with "LLLL"
+            // this is suitable for the form <month> <year>
+            XCTAssertEqual("veljača 1938", testDateUTC.formatted(fmt: "LLLL yyyy", locale: Locale(identifier: "hr_HR")))
+            XCTAssertEqual("luty 1938", testDateUTC.formatted(fmt: "LLLL yyyy", locale: Locale(identifier: "pl_PL")))
+            XCTAssertEqual("февраль 1938", testDateUTC.formatted(fmt: "LLLL yyyy", locale: Locale(identifier: "ru_RU")))
+            XCTAssertEqual("February 1938", testDateUTC.formatted(fmt: "LLLL yyyy", locale: Locale(identifier: "en_US")))
+            XCTAssertEqual("février 1938", testDateUTC.formatted(fmt: "LLLL yyyy", locale: Locale(identifier: "fr_CH")))
+        }
     }
 }
