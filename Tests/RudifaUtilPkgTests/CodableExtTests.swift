@@ -11,6 +11,7 @@ import XCTest
 struct Language: Codable, Equatable {
     var name: String
     var version: String
+    var tiobeIndex: Int?
 }
 
 class CodableExtTests: XCTestCase {
@@ -98,9 +99,40 @@ class CodableExtTests: XCTestCase {
             } else {
                 // handle decode error
                 XCTFail("let lang = Language.decode(from: string)")
-           }
+            }
         } else {
             // handle encode error
+            XCTFail("let string: String = language.encode()")
+        }
+    }
+
+    func test_encode_json_jsonpp() {
+        // create an instance
+        let language = Language(name: "Swift", version: "5.7", tiobeIndex: 18)
+
+        // encode to String?
+        if let string: String = language.encode() {
+            XCTAssertEqual(string, #"{"name":"Swift","version":"5.7","tiobeIndex":18}"#)
+        } else {
+            XCTFail("let string: String = language.encode()")
+        }
+
+        // encode to String?
+        if let string: String = language.json {
+            XCTAssertEqual(string, #"{"name":"Swift","version":"5.7","tiobeIndex":18}"#)
+        } else {
+            XCTFail("let string: String = language.encode()")
+        }
+        // encode to String?
+        if let string: String = language.jsonpp {
+            XCTAssertEqual(string, #"""
+            {
+              "name" : "Swift",
+              "version" : "5.7",
+              "tiobeIndex" : 18
+            }
+            """#)
+        } else {
             XCTFail("let string: String = language.encode()")
         }
     }
