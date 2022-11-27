@@ -79,11 +79,7 @@ public extension Encodable {
     /// Encode self into a json String?
     /// - Returns: String?
     var json: String? {
-        let encoder = JSONEncoder()
-        if let data: Data = encode(encoder) {
-            return String(data: data, encoding: .utf8)
-        }
-        return nil
+        return encode()
     }
 
     /// Encode self into a prettyprinted json String?
@@ -91,10 +87,7 @@ public extension Encodable {
     var jsonpp: String? {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        if let data: Data = encode(encoder) {
-            return String(data: data, encoding: .utf8)
-        }
-        return nil
+        return encode(encoder)
     }
 }
 
