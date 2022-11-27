@@ -49,7 +49,7 @@ import Foundation
         // handle encode error
     }
  */
-extension Encodable {
+public extension Encodable {
     /// Encode self into Data
     /// THROWING VERSION REMOVED
     /// - Parameter encoder: defaults to JSONEncoder
@@ -62,14 +62,35 @@ extension Encodable {
     /// Encode self into Data?
     /// - Parameter encoder: defaults to JSONEncoder
     /// - Returns: Data?
-    public func encode(_ encoder: JSONEncoder = JSONEncoder()) -> Data? {
+    func encode(_ encoder: JSONEncoder = JSONEncoder()) -> Data? {
         return try? encoder.encode(self)
     }
 
-    /// Encode self into String?
+    /// Encode self into a String?
     /// - Parameter encoder: defaults to JSONEncoder
     /// - Returns: String?
-    public func encode(_ encoder: JSONEncoder = JSONEncoder()) -> String? {
+    func encode(_ encoder: JSONEncoder = JSONEncoder()) -> String? {
+        if let data: Data = encode(encoder) {
+            return String(data: data, encoding: .utf8)
+        }
+        return nil
+    }
+
+    /// Encode self into a json String?
+    /// - Returns: String?
+    var json: String? {
+        let encoder = JSONEncoder()
+        if let data: Data = encode(encoder) {
+            return String(data: data, encoding: .utf8)
+        }
+        return nil
+    }
+
+    /// Encode self into a prettyprinted json String?
+    /// - Returns: String?
+    var jsonpp: String? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
         if let data: Data = encode(encoder) {
             return String(data: data, encoding: .utf8)
         }
@@ -80,7 +101,7 @@ extension Encodable {
 /**
  Usage examples: see `extension Encodable`
  */
-extension Decodable {
+public extension Decodable {
     /// Decode Data into Self
     /// THROWING VERSION REMOVED
     /// - Parameters:
@@ -97,7 +118,7 @@ extension Decodable {
     ///   - decoder: defaults to JSONDecoder
     ///   - data: previously encoded Data
     /// - Returns: Self?
-    public static func decode(with decoder: JSONDecoder = JSONDecoder(), from data: Data) -> Self? {
+    static func decode(with decoder: JSONDecoder = JSONDecoder(), from data: Data) -> Self? {
         return try? decoder.decode(Self.self, from: data)
     }
 
@@ -106,7 +127,7 @@ extension Decodable {
     ///   - decoder: defaults to JSONDecoder
     ///   - string: previously encoded String
     /// - Returns: Self?
-    public static func decode(with decoder: JSONDecoder = JSONDecoder(), from string: String) -> Self? {
+    static func decode(with decoder: JSONDecoder = JSONDecoder(), from string: String) -> Self? {
         if let data = string.data(using: .utf8) {
             return try? decoder.decode(Self.self, from: data)
         }

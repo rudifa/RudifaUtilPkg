@@ -101,7 +101,7 @@ public extension String {
     /// - Parameter regex: String pattern
     /// - Returns: [String]
     ///  Note: deprecated because it does not handle capture groups
-    @available(*, deprecated, message: "use findAllMatches(with:) instead")
+    @available(*, deprecated, message: "use allMatches(with:) instead")
     func matches(for regex: String) -> [String] {
         do {
             let regex = try NSRegularExpression(pattern: regex)
