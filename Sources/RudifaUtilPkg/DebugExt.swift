@@ -30,9 +30,9 @@ import Foundation
 ///
 /// - Add to app's info.plist 2 keys:
 ///
-/// `<key>UIFileSharingEnabled</key><true/>`
+/// | Application supports iTunes file sharing | YES | <key>UIFileSharingEnabled</key><true/> |
 ///
-/// `<key>LSSupportsOpeningDocumentsInPlace</key><true/>`
+/// | Supports opening documents in place      | YES | <key>LSSupportsOpeningDocumentsInPlace</key><true/> |
 ///
 /// - Connect iOS device to the Mac via cable or WiFi
 ///
