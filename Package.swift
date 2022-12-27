@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.7
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,13 +6,14 @@ import PackageDescription
 let package = Package(
     name: "RudifaUtilPkg",
     platforms: [
-       .iOS(.v10),
+        .iOS(.v13), .macOS(.v13),
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "RudifaUtilPkg",
-            targets: ["RudifaUtilPkg"]),
+            targets: ["RudifaUtilPkg"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -23,9 +24,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "RudifaUtilPkg",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "RudifaUtilPkgTests",
-            dependencies: ["RudifaUtilPkg"]),
+            dependencies: ["RudifaUtilPkg"]
+        ),
     ]
 )

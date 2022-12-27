@@ -1,5 +1,5 @@
 //
-//  DebugExt.swift v.0.3.2
+//  DebugExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 23.07.19.
@@ -48,7 +48,7 @@ import Foundation
 ///
 /// - Open the app's directory as above, right-click on the file and click `Delete`
 
-extension NSObject {
+public extension NSObject {
     /// Print to stdout current class and function names and optional info
     ///
     /// - Note: Printing is enabled by DEBUG constant which is normally absent from release builds.
@@ -59,7 +59,7 @@ extension NSObject {
     ///  - info: information string; a leading "@" will be replaced by the call date
     ///  - fnc: current function (default value is the caller)
     @available(*, deprecated, message: "use printClassAndFunc(\"...\" instead")
-    public func printClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) {
+    func printClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) {
         #if DEBUG
             print(formatClassAndFunc(info: inf_, fnc: fnc_))
         #endif
@@ -74,7 +74,7 @@ extension NSObject {
     /// - Parameters:
     ///  - _: information string; a leading "@" will be replaced by the call date
     ///  - fnc: current function (default value is the caller)
-    public func printClassAndFunc(_ info: String = "", fnc fnc_: String = #function) {
+    func printClassAndFunc(_ info: String = "", fnc fnc_: String = #function) {
         #if DEBUG
             print(formatClassAndFunc(info: info, fnc: fnc_))
         #endif
@@ -87,7 +87,7 @@ extension NSObject {
     ///
     /// - TODO: remove when the above deprecated form is removed
     ///
-    public func printClassAndFunc(_fnc fnc_: String = #function) {
+    func printClassAndFunc(_fnc fnc_: String = #function) {
         #if DEBUG
             print(formatClassAndFunc(info: "", fnc: fnc_))
         #endif
@@ -100,7 +100,7 @@ extension NSObject {
     /// - Parameters:
     ///  - info: information string; a leading "@" will be replaced by the call date
     ///  - fnc: current function (default value is the caller)
-    public func logClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) {
+    func logClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) {
         Logger.shared.print(formatClassAndFunc(info: inf_, fnc: fnc_))
     }
 
@@ -109,7 +109,7 @@ extension NSObject {
     /// - Parameters:
     ///  - info: information string; a leading "@" will be replaced by the call date
     ///  - fnc: current function (default value is the caller)
-    public func formatClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) -> String {
+    func formatClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) -> String {
         var dateTime = ""
         var info = inf_
         if inf_.first == "@" {
@@ -120,7 +120,7 @@ extension NSObject {
     }
 
     /// Return dateTimeString with microsecond resolution
-    func dateTimeString() -> String {
+    internal func dateTimeString() -> String {
         let cal = Calendar.current
         let comps = cal.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond],
                                        from: Date())
@@ -157,7 +157,7 @@ class Logger: TextOutputStream {
             handle.write(string.data(using: .utf8)!)
             handle.closeFile()
         } else {
-            ((try? string.data(using: .utf8)?.write(to: logUrl)) as ()??)
+            (try? string.data(using: .utf8)?.write(to: logUrl)) as ()??
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CollectionExt.swift v.0.6.0
+//  CollectionExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 24.12.19.
@@ -32,8 +32,8 @@ public extension Array {
     ///   - predicate: returns true if a pair of elements, one from each array, satisfies it
     /// - Returns: updated array
     func updatedPreservingOrder(from other: Array, predicate: (Element, Element) -> Bool) -> [Element] {
-        var updated: [Element] = filter { elt1 in other.contains { (elt2) -> Bool in predicate(elt1, elt2) } }
-        updated += other.filter { elt1 in !self.contains { (elt2) -> Bool in predicate(elt1, elt2) } }
+        var updated: [Element] = filter { elt1 in other.contains { elt2 -> Bool in predicate(elt1, elt2) } }
+        updated += other.filter { elt1 in !self.contains { elt2 -> Bool in predicate(elt1, elt2) } }
         return updated
     }
 

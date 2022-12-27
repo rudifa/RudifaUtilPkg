@@ -1,6 +1,6 @@
 //
-//  StringExtTests.swift v.0.3.0
-//  RudifaUtilPkg
+//  StringExtTests.swift
+//  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 22.07.18.
 //  Copyright © 2018 Rudolf Farkas. All rights reserved.

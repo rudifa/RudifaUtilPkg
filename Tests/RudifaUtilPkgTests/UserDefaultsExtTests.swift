@@ -1,5 +1,5 @@
 //
-//  UserDefaultsExtTests.swift v.0.3.0
+//  UserDefaultsExtTests.swift
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 13.03.20.

@@ -1,5 +1,5 @@
 //
-//  EnumExt.swift v.0.3.0
+//  EnumExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 18.03.20.

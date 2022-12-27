@@ -1,10 +1,12 @@
 //
 //  NSAttributedStringExtTests.swift
-//  RudifaUtilPkgDemoTests
+//  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 18.10.20.
 //  Copyright © 2020 Rudolf Farkas. All rights reserved.
 //
+
+#if os(iOS)
 
 import XCTest
 
@@ -53,3 +55,4 @@ class NSAttributedStringExtTests: XCTestCase {
         }
     }
 }
+#endif

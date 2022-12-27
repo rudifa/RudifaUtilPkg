@@ -1,5 +1,5 @@
 //
-//  XCTExtTests.swift v.0.1.0
+//  XCTExtTests.swift
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 21.03.20.

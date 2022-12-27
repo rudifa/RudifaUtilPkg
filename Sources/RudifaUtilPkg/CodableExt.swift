@@ -1,5 +1,5 @@
 //
-//  CodableExt.swift v.0.2.1
+//  CodableExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 23.06.19.

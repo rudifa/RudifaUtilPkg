@@ -1,5 +1,5 @@
 //
-//  CodableExtTests.swift v.0.2.0
+//  CodableExtTests.swift
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 23.06.19.
