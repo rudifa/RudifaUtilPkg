@@ -1,5 +1,5 @@
 //
-//  EnumExtTests.swift v.0.3.0
+//  EnumExtTests.swift
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 18.03.20.

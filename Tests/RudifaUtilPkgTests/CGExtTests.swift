@@ -1,5 +1,5 @@
 //
-//  CGExtTests.swift v.0.1.2
+//  CGExtTests.swift
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 31.07.18.

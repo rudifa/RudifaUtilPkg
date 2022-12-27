@@ -1,5 +1,5 @@
 //
-//  DateExt.swift v.0.4.0
+//  DateExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 18.06.18.

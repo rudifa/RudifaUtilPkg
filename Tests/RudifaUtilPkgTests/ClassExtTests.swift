@@ -1,6 +1,6 @@
 //
-//  ClassExtTests.swift v.0.1.0
-//  RudifaUtilPkg
+//  ClassExtTests.swift
+//  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 29.09.19.
 //  Copyright © 2019 Rudolf Farkas. All rights reserved.
@@ -11,7 +11,6 @@
 #endif
 
 import XCTest
-
 
 class ClassExtTests: XCTestCase {
     override func setUp() {}
@@ -27,6 +26,6 @@ class ClassExtTests: XCTestCase {
             XCTAssertEqual("MyClass", MyClass().className)
             XCTAssertEqual("UIViewController", UIViewController.className)
             XCTAssertEqual("UIViewController", UIViewController().className)
-       #endif
+        #endif
     }
 }

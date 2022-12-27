@@ -1,5 +1,5 @@
 //
-//  ClassExt.swift v.0.1.0
+//  ClassExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 29.09.19.

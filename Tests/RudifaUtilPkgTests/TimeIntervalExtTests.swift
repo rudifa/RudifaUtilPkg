@@ -1,6 +1,6 @@
 //
 //  TimeIntervalExtTests.swift
-//  RudifaUtilPkg
+//  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 31.08.21.
 //  Copyright © 2021 Rudolf Farkas. All rights reserved.

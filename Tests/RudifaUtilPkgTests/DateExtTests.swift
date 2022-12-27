@@ -1,5 +1,5 @@
 //
-//  DateExtTests.swift.swift v.0.4.0
+//  DateExtTests.swift.swift
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 18.06.18.
@@ -434,6 +434,54 @@ class DateExtTests: XCTestCase {
             XCTAssertEqual("февраль 1938", testDateUTC.formatted(fmt: "LLLL yyyy", locale: Locale(identifier: "ru_RU")))
             XCTAssertEqual("February 1938", testDateUTC.formatted(fmt: "LLLL yyyy", locale: Locale(identifier: "en_US")))
             XCTAssertEqual("février 1938", testDateUTC.formatted(fmt: "LLLL yyyy", locale: Locale(identifier: "fr_CH")))
+        }
+    }
+
+    func test_DataToFromString() {
+        do {
+            let string = "qwertzuiop"
+            let data = Data(from: string)
+            let string2 = data?.string
+            XCTAssertEqual(string, string2)
+            XCTAssertEqual(data?.count, 10)
+        }
+        do {
+            let string = ""
+            let data = Data(from: string)
+            let string2 = data?.string
+            XCTAssertEqual(string, string2)
+            XCTAssertEqual(data?.count, 0)
+        }
+    }
+
+    func test_WriteReadCacheFile() {
+        do {
+            let string = "qwertzuiop"
+            let data = Data(from: string)
+            guard let url = data?.writeToCacheFile(name: "zap" + string, ext: "txt") else {
+                XCTFail("url == nil")
+                return
+            }
+            guard let data2 = Data(fromFileAt: url) else {
+                XCTFail("url == nil")
+                return
+            }
+            let string2 = data2.string
+            XCTAssertEqual(string, string2)
+        }
+        do {
+            let string = ""
+            let data = Data(from: string)
+            guard let url = data?.writeToCacheFile(name: "zap" + string, ext: "txt") else {
+                XCTFail("url == nil")
+                return
+            }
+            guard let data2 = Data(fromFileAt: url) else {
+                XCTFail("url == nil")
+                return
+            }
+            let string2 = data2.string
+            XCTAssertEqual(string, string2)
         }
     }
 }

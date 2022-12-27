@@ -1,5 +1,5 @@
 //
-//  DateIntervalExt.swift v.0.1.3
+//  DateIntervalExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 28.08.20.
@@ -14,7 +14,7 @@ public extension DateInterval {
     /// Returns true if self fully overlaps with interval
     /// - Parameter interval: interval to compare with
     func fullyOverlaps(with interval: DateInterval) -> Bool {
-        if let intersection = self.intersection(with: interval) {
+        if let intersection = intersection(with: interval) {
             if intersection.duration >= min(duration, interval.duration) {
                 return true
             }
@@ -25,7 +25,7 @@ public extension DateInterval {
     /// Returns true if self partially overlaps with interval
     /// - Parameter interval: interval to compare with
     func partiallyOverlaps(with interval: DateInterval) -> Bool {
-        if let intersection = self.intersection(with: interval) {
+        if let intersection = intersection(with: interval) {
             if intersection.duration > 0.0 {
                 return true
             }

@@ -1,5 +1,5 @@
 //
-//  DebugExtTests.swift v.0.3.2
+//  DebugExtTests.swift
 //  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 23.07.19.

@@ -1,5 +1,5 @@
 //
-//  TimeIntervalExt.swift v.0.1.0
+//  TimeIntervalExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 22.06.19.

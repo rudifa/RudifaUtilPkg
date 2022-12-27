@@ -1,5 +1,5 @@
 //
-//  UserDefaultsExt.swift v.0.3.0
+//  UserDefaultsExt.swift
 //  RudifaUtilPkg
 //
 //  Created by Rudolf Farkas on 13.03.20.

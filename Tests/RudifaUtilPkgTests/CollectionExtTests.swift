@@ -1,6 +1,6 @@
 //
-//  CollectionExtTests.swift v.0.6.0
-//  RudifaUtilPkg
+//  CollectionExtTests.swift
+//  RudifaUtilPkgTests
 //
 //  Created by Rudolf Farkas on 24.12.19.
 //  Copyright © 2019 Rudolf Farkas. All rights reserved.
