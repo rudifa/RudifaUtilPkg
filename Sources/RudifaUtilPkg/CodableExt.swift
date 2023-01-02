@@ -9,46 +9,54 @@
 import Foundation
 
 /**
- Extensions nspired by https://gist.github.com/StanislavK/e763cdc9fbe92f62f3c9dbd648e7e7ad
+ ###Usage examples:###
 
- Usage examples
+ ````
+     struct Language: Codable {
+         var name: String
+         var version: String
+     }
+ ````
 
-    struct Language: Codable {
-        var name: String
-        var version: String
-    }
+ Create an instance
+ ````
+    let language = Language(name: "Swift", version: "5.7")
+ ````
+ Encode to Data? and decode to a new Language instance
 
-    // create an instance
-    let language = Language(name: "Swift", version: "4")
+ ````
+ if let data: Data = language.encode() {
+    // use data here...
 
-    // encode to Data?
-    if let data: Data = language.encode() {
-         // use data here
-
-        // decode from Data
-        if let lang = Language.decode(from: data) {
-            // use lang here
-        } else {
-            // handle decode error
-        }
+    // decode from Data
+    if let lang = Language.decode(from: data) {
+         // use lang here
     } else {
-        // handle encode error
+         // handle decode error
     }
+ } else {
+     // handle encode error
+ }
+ ````
 
-    // encode to String?
-    if let string: String = language.encode() {
-        // use string here
+ Encode instance to String? and decode to a new Language instance
 
-        // decode from String
-        if let lang = Language.decode(from: string) {
-            // use lang here
-        } else {
-            // handle decode error
-        }
+ ````
+ if let string: String = language.encode() {
+    // use string here...
+
+    // decode from String
+    if let lang = Language.decode(from: string) {
+        // use lang here
     } else {
-        // handle encode error
+        // handle decode error
     }
+ } else {
+    // handle encode error
+ }
+ ````
  */
+
 public extension Encodable {
     /// Encode self into Data
     /// THROWING VERSION REMOVED
