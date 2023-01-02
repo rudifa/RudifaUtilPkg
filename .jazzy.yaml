@@ -9,8 +9,8 @@ xcodebuild_arguments:
   - iphonesimulator
   - -destination
   - 'platform=iOS Simulator,name=iPhone 14,OS=latest'
-author: Rudi Farkas
-copyright: Copyright © 2019 Rudi Farkas. All rights reserved.
+author: Rudolf Farkas @rudifa
+copyright: Copyright © 2019-2023 Rudolf Farkas. All rights reserved.
 min_acl: internal
 
 # from build_and_test.xml
