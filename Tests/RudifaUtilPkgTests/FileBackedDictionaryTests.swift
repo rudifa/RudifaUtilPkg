@@ -95,9 +95,12 @@ class FileBackedDictionaryTests: XCTestCase {
         }
 
         XCTAssertEqual(fbDict.count, 3)
-        // keys
         XCTAssertEqual(fbDict.keys, ["resource_1", "resource_2", "resource_3"])
-        // values
         XCTAssertEqual(fbDict.values, [resource1, resource2, resource3])
-    }
+
+        fbDict.removeValue(forKey: "resource_2")
+        XCTAssertEqual(fbDict.count, 2)
+        XCTAssertEqual(fbDict.keys, ["resource_1", "resource_3"])
+        XCTAssertEqual(fbDict.values, [resource1, resource3])
+   }
 }
