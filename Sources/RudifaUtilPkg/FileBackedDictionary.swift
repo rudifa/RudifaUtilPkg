@@ -147,7 +147,7 @@ public struct FileBackedDictionary<T: Codable> {
 
     /// Remove the value for key from  the dictionary and from the file
     /// - Parameter forKey: key
-    private mutating func removeValue(forKey key: String) {
+    public mutating func removeValue(forKey key: String) {
         dictionary[key] = nil
         let fileURL = self.fileURL(key: key)
         do {
