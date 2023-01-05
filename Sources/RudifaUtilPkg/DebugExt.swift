@@ -49,6 +49,8 @@ import Foundation
 /// - Open the app's directory as above, right-click on the file and click `Delete`
 
 public extension NSObject {
+    // MARK: print to console (DEBUG only)
+
     /// Print to stdout current class and function names and optional info
     ///
     /// - Note: Printing is enabled by DEBUG constant which is normally absent from release builds.
@@ -93,6 +95,8 @@ public extension NSObject {
         #endif
     }
 
+    // MARK: log to file log.txt
+
     /// Print to log file current class and function names and optional info
     ///
     /// - Requires: to be called from a subclass of NSObject
@@ -100,16 +104,43 @@ public extension NSObject {
     /// - Parameters:
     ///  - info: information string; a leading "@" will be replaced by the call date
     ///  - fnc: current function (default value is the caller)
+    @available(*, deprecated, message: "use logClassAndFunc(\"...\" instead")
     func logClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) {
         Logger.shared.print(formatClassAndFunc(info: inf_, fnc: fnc_))
     }
+
+    /// Print to log file current class and function names and optional info
+    ///
+    /// - Note: Printing is enabled by DEBUG constant which is normally absent from release builds.
+    ///
+    /// - Requires: to be called from a subclass of NSObject
+    ///
+    /// - Parameters:
+    ///  - _: information string; a leading "@" will be replaced by the call date
+    ///  - fnc: current function (default value is the caller)
+    func logClassAndFunc(_ info: String = "", fnc fnc_: String = #function) {
+        Logger.shared.print(formatClassAndFunc(info: info, fnc: fnc_))
+    }
+
+    /// Print to log file current class and function names and optional info
+    ///
+    /// - Note: This third form is only needed to make the call logClassAndFunc() unambigous
+    ///         when both above forms are present in the code.
+    ///
+    /// - TODO: remove when the above deprecated form is removed
+    ///
+    func logClassAndFunc(_fnc fnc_: String = #function) {
+        Logger.shared.print(formatClassAndFunc(info: "", fnc: fnc_))
+    }
+
+    // MARK: supporting functions
 
     /// Return a string containing current class and function names and optional info
     /// - Requires: to be called from a subclass of NSObject
     /// - Parameters:
     ///  - info: information string; a leading "@" will be replaced by the call date
     ///  - fnc: current function (default value is the caller)
-    func formatClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) -> String {
+    internal func formatClassAndFunc(info inf_: String = "", fnc fnc_: String = #function) -> String {
         var dateTime = ""
         var info = inf_
         if inf_.first == "@" {
