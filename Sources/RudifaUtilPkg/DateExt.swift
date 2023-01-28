@@ -378,28 +378,68 @@ public extension Calendar {
 
 // https://www.swiftbysundell.com/articles/property-wrappers-in-swift/
 
-/// Variables declared like these below behave like normal Date or [Date] variables,
-/// except that they are constrained to whole month, whole day and whole hours, respectively
-///
-// @WholeMonth var yMonth: Date
-// @WholeDay var ymDay: Date
-// @WholeHour var ymDay: Date
-// @WholeHours var ymdHours: [Date]
+/**
+
+ ### Wrapped Date variables which constrain their values to the start of the enclosing interval
+
+  Usage example:
+
+  ```
+      func demo_usingPropertyWrappers(_ date: Date) {
+          @WholeHour var ymdHour = date
+          @WholeHours var ymdHours = [date, date.addingTimeInterval(100000)]
+          @WholeDay var ymDay = date
+          @WholeMonth var yMonth = date
+
+          print("date:", date.EEEE_ddMMyyyy_HHmmss)
+          print("ymdHour:", ymdHour.EEEE_ddMMyyyy_HHmmss)
+          print("ymdHours:", ymdHours.map {$0.EEEE_ddMMyyyy_HHmmss})
+          print("ymDay:", ymDay.EEEE_ddMMyyyy_HHmmss)
+          print("yMonth:", yMonth.EEEE_ddMMyyyy_HHmmss)
+      }
+
+      let date = Date(timeIntervalSinceReferenceDate: 600000083)
+      demo_usingPropertyWrappers(date)
+  ```
+
+  Printed output:
+
+  ```
+      date: Monday 06.01.2020 11:41:23
+      ymdHour: Monday 06.01.2020 11:00:00
+      ymdHours: ["Monday 06.01.2020 11:00:00", "Tuesday 07.01.2020 15:00:00"]
+      ymDay: Monday 06.01.2020 00:00:00
+      yMonth: Wednesday 01.01.2020 00:00:00
+
+  ```
+ */
 
 @propertyWrapper public struct WholeMonth {
     public var wrappedValue: Date { didSet { wrappedValue = wrappedValue.wholeMonth! } }
     public init(wrappedValue: Date) { self.wrappedValue = wrappedValue.wholeMonth! }
 }
 
+/**
+ Usage example: see **WholeMonth**
+ */
+
 @propertyWrapper public struct WholeDay {
     public var wrappedValue: Date { didSet { wrappedValue = wrappedValue.wholeDay! } }
     public init(wrappedValue: Date) { self.wrappedValue = wrappedValue.wholeDay! }
 }
 
+/**
+ Usage example: see **WholeMonth**
+ */
+
 @propertyWrapper public struct WholeHour {
     public var wrappedValue: Date { didSet { wrappedValue = wrappedValue.wholeHour! } }
     public init(wrappedValue: Date) { self.wrappedValue = wrappedValue.wholeHour! }
 }
+
+/**
+ Usage example: see **WholeMonth**
+ */
 
 @propertyWrapper public struct WholeHours {
     private var storage = [Date]()

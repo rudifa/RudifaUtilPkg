@@ -375,6 +375,22 @@ class DateExtTests: XCTestCase {
 
         iuTest.ymdHours.removeAll()
         XCTAssertEqual(iuTest.ymdHours, [])
+
+        func demo_usingPropertyWrappers(_ date: Date) {
+            @WholeHour var ymdHour = date
+            @WholeHours var ymdHours = [date, date.addingTimeInterval(100000)]
+            @WholeDay var ymDay = date
+            @WholeMonth var yMonth = date
+
+            print("date:", date.EEEE_ddMMyyyy_HHmmss)
+            print("ymdHour:", ymdHour.EEEE_ddMMyyyy_HHmmss)
+            print("ymdHours:", ymdHours.map {$0.EEEE_ddMMyyyy_HHmmss})
+            print("ymDay:", ymDay.EEEE_ddMMyyyy_HHmmss)
+            print("yMonth:", yMonth.EEEE_ddMMyyyy_HHmmss)
+        }
+
+        let date = Date(timeIntervalSinceReferenceDate: 600000083)
+        demo_usingPropertyWrappers(date)
     }
 
     func test_twoYearInterval() {
