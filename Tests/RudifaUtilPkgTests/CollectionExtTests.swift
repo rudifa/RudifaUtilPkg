@@ -164,14 +164,14 @@ class CollectionExtTests: XCTestCase {
             // using the inline predicate
 
             let updatedCalendarDataArray = calendarDataArray.updatedPreservingOrder(from: incomingCalendarDataArray,
-                                                                                    predicate: { (elt1, elt2) -> Bool in elt1.title == elt2.title })
+                                                                                    predicate: { elt1, elt2 -> Bool in elt1.title == elt2.title })
 
             printClassAndFunc("updatedCalendarDataArray= \(updatedCalendarDataArray.map { $0.string })")
             XCTAssertEqual(updatedCalendarDataArray.map { $0.string }, expectedResultStringArray)
 
             var localCopy = calendarDataArray
             localCopy.updatePreservingOrder(from: incomingCalendarDataArray,
-                                            predicate: { (elt1, elt2) -> Bool in elt1.title == elt2.title })
+                                            predicate: { elt1, elt2 -> Bool in elt1.title == elt2.title })
             XCTAssertEqual(localCopy.map { $0.string }, expectedResultStringArray)
         }
 
@@ -323,5 +323,18 @@ class CollectionExtTests: XCTestCase {
         XCTAssertEqual(array.moved(where: MockCalendarData(title: "Anemone").sameTitle, to: 3).map { $0.title }, ["Begonia", "Clematis", "Dahlia", "Anemone"])
 
         XCTAssertEqual(array.moved(where: MockCalendarData(title: "Orchid").sameTitle, to: 3).map { $0.title }, ["Anemone", "Begonia", "Clematis", "Dahlia"])
+    }
+
+    func test_Array_sortedBySuffixAndPrefix() {
+        do {
+            let array = ["1.A", "9.B", "5.A", "7.C", "3.B", "7.A", "4.A", "3", "6", "1", "5.C"]
+            let sortedArray = array.sortedBySuffixAndPrefix(separator: ".")
+            XCTAssertEqual(sortedArray, ["1", "3", "6", "1.A", "4.A", "5.A", "7.A", "3.B", "9.B", "5.C", "7.C"])
+        }
+        do {
+            let array = ["1_A", "9_B", "5_A", "7_C", "3_B", "7_A", "4_A", "3", "6", "1", "5_C"]
+            let sortedArray = array.sortedBySuffixAndPrefix()
+            XCTAssertEqual(sortedArray, ["1", "3", "6", "1_A", "4_A", "5_A", "7_A", "3_B", "9_B", "5_C", "7_C"])
+        }
     }
 }

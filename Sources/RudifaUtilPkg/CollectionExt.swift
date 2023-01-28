@@ -118,3 +118,29 @@ public extension Array {
         return temp
     }
 }
+
+public extension Array where Element == String {
+        /// Given an array of strings, each optionally sepatated into prefix and suffix by the separator,
+        /// sort strings aplhabeticall, but grouped by suffix
+        /// - Parameter separator: defaults to "_"
+        /// - Returns: sorted array
+    func sortedBySuffixAndPrefix(separator: String = "_") -> [Element] {
+        return sorted { a, b -> Bool in
+            let aComponents = a.components(separatedBy: separator)
+            let bComponents = b.components(separatedBy: separator)
+            if aComponents.count == 1, bComponents.count == 1 {
+                return a < b
+            } else if aComponents.count == 1 {
+                return true
+            } else if bComponents.count == 1 {
+                return false
+            } else {
+                if aComponents[1] == bComponents[1] {
+                    return aComponents[0] < bComponents[0]
+                } else {
+                    return aComponents[1] < bComponents[1]
+                }
+            }
+        }
+    }
+}
