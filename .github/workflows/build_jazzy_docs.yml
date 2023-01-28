@@ -2,51 +2,50 @@ name: build_jazzy_docs
 
 on:
   push:
-    branches: [ master ]
+    branches: [main]
   pull_request:
-    branches: [ master ]
+    branches: [main]
   workflow_dispatch:
-    branches: [ master ]
-    
+    branches: [main]
+
 jobs:
   build:
-
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: echo $GITHUB_SHA
-      run: echo $GITHUB_SHA
+      - name: echo $GITHUB_SHA
+        run: echo $GITHUB_SHA
 
-    - name: git fetch --all
-      run: git fetch --all
+      - name: git fetch --all
+        run: git fetch --all
 
-    - name: git log -1 --oneline 
-      run: git log -1 --oneline
+      - name: git log -1 --oneline
+        run: git log -1 --oneline
 
-    - name: git checkout gh-pages || git checkout -b gh-pages
-      run: git checkout gh-pages || git checkout -b gh-pages
+      - name: git checkout gh-pages || git checkout -b gh-pages
+        run: git checkout gh-pages || git checkout -b gh-pages
 
-    - name: git reset --hard $GITHUB_SHA
-      run: git reset --hard $GITHUB_SHA
+      - name: git reset --hard $GITHUB_SHA
+        run: git reset --hard $GITHUB_SHA
 
-    - name: install jazzy
-      run: gem install jazzy --no-document
+      - name: install jazzy
+        run: gem install jazzy --no-document
 
-    - name: build jazzy docs on gh-pages
-      run: jazzy
+      - name: build jazzy docs on gh-pages
+        run: jazzy
 
-    - name: git add .
-      run: git add .
+      - name: git add .
+        run: git add .
 
-    - name: git commit -m "update jazzy docs"
-      run: git commit -m "update jazzy docs"
+      - name: git commit -m "update jazzy docs"
+        run: git commit -m "update jazzy docs"
 
-    - name: git push --set-upstream origin gh-pages --force
-      run: git push --set-upstream origin gh-pages --force
- 
-    - name: git checkout master
-      run: git checkout master
+      - name: git push --set-upstream origin gh-pages --force
+        run: git push --set-upstream origin gh-pages --force
+
+      - name: git checkout main
+        run: git checkout main

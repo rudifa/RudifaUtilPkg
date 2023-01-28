@@ -2,23 +2,21 @@ name: build_and_test
 
 on:
   push:
-    branches: [ master ]
+    branches: [main]
   pull_request:
-    branches: [ master ]
+    branches: [main]
   workflow_dispatch:
-    branches: [ master ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
-    # - name: Build
-    #   run: swift build -v
-    # - name: Run tests
-    #   run: swift test -v
-    - name: xcodebuild test
-      run: xcodebuild test -scheme RudifaUtilPkg -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest' -verbose
-
+      - uses: actions/checkout@v2
+      # - name: Build
+      #   run: swift build -v
+      # - name: Run tests
+      #   run: swift test -v
+      - name: xcodebuild test
+        run: xcodebuild test -scheme RudifaUtilPkg -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest' -verbose
