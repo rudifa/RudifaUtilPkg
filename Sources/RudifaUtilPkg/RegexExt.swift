@@ -171,18 +171,21 @@ public extension String {
     /// Expects self to be a price string consisting of
     ///  a 3-letter currency code and an integer or decimal number,
     ///  in either order, separated by whitespace characters,
-    ///  for example
-    ///  "USD 349.95" or "234.50 EUR".
+    ///  for example "USD 349.95" or "234.50 EUR".
     ///  See https://en.wikipedia.org/wiki/ISO_4217
+    /// Moreover, tolerates and removes a thousands separator "," if present in self.
+    /// for exmple "CHF 1,233.00"
     func extractCurrencyAndAmount() -> (String, Double)? {
+        // remove the optional thousands separator
+        let string = replacingOccurrences(of: ",", with: "")
         let pattCurrency = #"([A-Z]{3})"#
         let pattWhitespace = #"\s+"#
         let pattNumber = #"([0-9]+(?:\.[0-9]+)*)"#
-        var matched = allMatches(with: "\(pattCurrency)\(pattWhitespace)\(pattNumber)")
+        var matched = string.allMatches(with: "\(pattCurrency)\(pattWhitespace)\(pattNumber)")
         if matched.count == 2, let amount = Double(matched[1]) {
             return (matched[0], amount)
         }
-        matched = allMatches(with: "\(pattNumber)\(pattWhitespace)\(pattCurrency)")
+        matched = string.allMatches(with: "\(pattNumber)\(pattWhitespace)\(pattCurrency)")
         if matched.count == 2, let amount = Double(matched[0]) {
             return (matched[1], amount)
         }
