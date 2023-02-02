@@ -8,6 +8,20 @@
 
 import Foundation
 
+// MARK: convenience properties and inits
+
+extension Date {
+    /// Returns self as milliseconds since 1970
+    var millisecondsSince1970: Int {
+        Int((timeIntervalSince1970 * 1000.0).rounded())
+    }
+
+    /// Initializes a date from milliseconds since 1970
+    init(millisecondsSince1970: Int) {
+        self = Date(timeIntervalSince1970: TimeInterval(millisecondsSince1970) / 1000)
+    }
+}
+
 // MARK: - Extended Date Formats
 
 public extension Date {
