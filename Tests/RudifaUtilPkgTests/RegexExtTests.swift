@@ -221,6 +221,17 @@ class RegexExtTests: XCTestCase {
                 XCTFail()
             }
         }
+        do {
+            let price = "CHF 1,250.00"
+            let expected = ("CHF", 1250.0)
+            let extracted = price.extractCurrencyAndAmount()
+            if let extracted = extracted {
+                XCTAssertEqual(expected.0, extracted.0)
+                XCTAssertEqual(expected.1, extracted.1)
+            } else {
+                XCTFail()
+            }
+        }
     }
 
     func test_CaptureGroups_investigate_1() {
