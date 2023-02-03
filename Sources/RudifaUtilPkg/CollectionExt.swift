@@ -120,10 +120,10 @@ public extension Array {
 }
 
 public extension Array where Element == String {
-        /// Given an array of strings, each optionally sepatated into prefix and suffix by the separator,
-        /// sort strings aplhabeticall, but grouped by suffix
-        /// - Parameter separator: defaults to "_"
-        /// - Returns: sorted array
+    /// Given an array of strings, each optionally sepatated into prefix and suffix by the separator,
+    /// sort strings aplhabeticall, but grouped by suffix
+    /// - Parameter separator: defaults to "_"
+    /// - Returns: sorted array
     func sortedBySuffixAndPrefix(separator: String = "_") -> [Element] {
         return sorted { a, b -> Bool in
             let aComponents = a.components(separatedBy: separator)

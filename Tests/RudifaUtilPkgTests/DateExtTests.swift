@@ -10,6 +10,47 @@
 import XCTest
 
 class DateExtTests: XCTestCase {
+
+
+    func test_MillisecondTimestamps() {
+        do {
+            let date = Date(timeIntervalSince1970: 1_675_373_197.591)
+            printClassAndFunc("date: \(date.ddMMyyyy_HHmmss_𝜇s) \(date.millisecondsSince1970)")
+            XCTAssertEqual(date.millisecondsSince1970, 1_675_373_197_591)
+            XCTAssertEqual(date.wholeMonth!.millisecondsSince1970, 1_675_206_000_000)
+            XCTAssertEqual(date.wholeMonth!.incremented(by: .month).millisecondsSince1970, 1_677_625_200_000)
+        }
+        do {
+//            let iso8601String = "2022-12-30T12:34:56.789Z"
+
+            let iso8601String = "2018-04-20T14:20:00-00:00"
+            let date = Date(iso8601String: iso8601String)!
+            printClassAndFunc("iso8601String: \(iso8601String), date: \(date.ddMMyyyy_HHmmss_𝜇s), millisecondsSince1970: \(date.millisecondsSince1970)")
+        }
+        do {
+//                /// Initializes self to the date specified in the ISO8601 string
+//                /// - Parameter fromISO8601String:like "2018-04-20T14:20:00-07:00"
+//                init?(iso8601UTC: String) {
+//                    let formatter = ISO8601DateFormatter()
+//                    guard let date = formatter.date(from: iso8601UTC) else {
+//                        return nil
+//                    }
+//                    self = date
+//                }
+//
+//                /// Initializes self to the date specified in the ISO8601 string
+//                /// - Parameter fromISO8601String:like "2018-04-20T14:20:00-07:00"
+//                init?(iso8601Local: String) {
+//                    let formatter = ISO8601DateFormatter()
+//                    formatter.timeZone = .current
+//                    guard let date = formatter.date(from: iso8601Local) else {
+//                        return nil
+//                    }
+//                    self = date
+//                }
+        }
+    }
+
     func test_TimeZoneFeatures() {
         let tzCurrent = TimeZone.current
         print("--- tzCurrent=\(tzCurrent)") // --- tzCurrent=Europe/Zurich (current)
@@ -378,18 +419,18 @@ class DateExtTests: XCTestCase {
 
         func demo_usingPropertyWrappers(_ date: Date) {
             @WholeHour var ymdHour = date
-            @WholeHours var ymdHours = [date, date.addingTimeInterval(100000)]
+            @WholeHours var ymdHours = [date, date.addingTimeInterval(100_000)]
             @WholeDay var ymDay = date
             @WholeMonth var yMonth = date
 
             print("date:", date.EEEE_ddMMyyyy_HHmmss)
             print("ymdHour:", ymdHour.EEEE_ddMMyyyy_HHmmss)
-            print("ymdHours:", ymdHours.map {$0.EEEE_ddMMyyyy_HHmmss})
+            print("ymdHours:", ymdHours.map { $0.EEEE_ddMMyyyy_HHmmss })
             print("ymDay:", ymDay.EEEE_ddMMyyyy_HHmmss)
             print("yMonth:", yMonth.EEEE_ddMMyyyy_HHmmss)
         }
 
-        let date = Date(timeIntervalSinceReferenceDate: 600000083)
+        let date = Date(timeIntervalSinceReferenceDate: 600_000_083)
         demo_usingPropertyWrappers(date)
     }
 
