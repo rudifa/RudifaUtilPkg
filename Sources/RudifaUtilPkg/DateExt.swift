@@ -8,6 +8,20 @@
 
 import Foundation
 
+// MARK: convenience properties and inits
+
+public extension Date {
+    /// Returns self as milliseconds since 1970
+    var millisecondsSince1970: Int {
+        Int((timeIntervalSince1970 * 1000.0).rounded())
+    }
+
+    /// Initializes a date from milliseconds since 1970
+    init(millisecondsSince1970: Int) {
+        self = Date(timeIntervalSince1970: TimeInterval(millisecondsSince1970) / 1000)
+    }
+}
+
 // MARK: - Extended Date Formats
 
 public extension Date {
@@ -121,6 +135,27 @@ public extension Date {
     init?(iso8601String: String) {
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: iso8601String) else {
+            return nil
+        }
+        self = date
+    }
+
+    /// Initializes self to the date specified in the ISO8601 string
+    /// - Parameter fromISO8601String:like "2018-04-20T14:20:00-07:00"
+    init?(iso8601UTC: String) {
+        let formatter = ISO8601DateFormatter()
+        guard let date = formatter.date(from: iso8601UTC) else {
+            return nil
+        }
+        self = date
+    }
+
+    /// Initializes self to the date specified in the ISO8601 string
+    /// - Parameter fromISO8601String:like "2018-04-20T14:20:00-07:00"
+    init?(iso8601Local: String) {
+        let formatter = ISO8601DateFormatter()
+        formatter.timeZone = .current
+        guard let date = formatter.date(from: iso8601Local) else {
             return nil
         }
         self = date
