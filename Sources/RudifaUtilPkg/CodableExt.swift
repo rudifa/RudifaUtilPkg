@@ -71,7 +71,7 @@ public extension Encodable {
     /// - Parameter encoder: defaults to JSONEncoder
     /// - Returns: Data?
     func encode(_ encoder: JSONEncoder = JSONEncoder()) -> Data? {
-        return try? encoder.encode(self)
+        try? encoder.encode(self)
     }
 
     /// Encode self into a String?
@@ -86,16 +86,30 @@ public extension Encodable {
 
     /// Encode self into a json String?
     /// - Returns: String?
+    var encode: String? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys]
+        if let data = try? encoder.encode(self) {
+            return String(data: data, encoding: .utf8)
+        }
+        return nil
+    }
+
+    /// Encode self into a json String?
+    /// - Returns: String?
     var json: String? {
-        return encode()
+        encode
     }
 
     /// Encode self into a prettyprinted json String?
     /// - Returns: String?
     var jsonpp: String? {
         let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        return encode(encoder)
+        encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+        if let data = try? encoder.encode(self) {
+            return String(data: data, encoding: .utf8)
+        }
+        return nil
     }
 }
 
@@ -120,7 +134,7 @@ public extension Decodable {
     ///   - data: previously encoded Data
     /// - Returns: Self?
     static func decode(with decoder: JSONDecoder = JSONDecoder(), from data: Data) -> Self? {
-        return try? decoder.decode(Self.self, from: data)
+        try? decoder.decode(Self.self, from: data)
     }
 
     /// Decode String into Self?
