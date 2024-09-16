@@ -46,7 +46,7 @@ class CodableExtTests: XCTestCase {
         let language = Language(name: "Swift", version: "5.3")
 
         // encode to String?
-        guard let string: String = language.encode() else {
+        guard let string: String = language.encode else {
             XCTFail("language.encode()")
             return
         }
@@ -88,7 +88,7 @@ class CodableExtTests: XCTestCase {
         }
 
         // encode to String?
-        if let string: String = language.encode() {
+        if let string: String = language.encode {
             // use string here
             XCTAssertEqual(string, #"{"name":"Swift","version":"5.3"}"#)
 
@@ -111,15 +111,15 @@ class CodableExtTests: XCTestCase {
         let language = Language(name: "Swift", version: "5.7", tiobeIndex: 18)
 
         // encode to String?
-        if let string: String = language.encode() {
-            XCTAssertEqual(string, #"{"name":"Swift","version":"5.7","tiobeIndex":18}"#)
+        if let string: String = language.encode {
+            XCTAssertEqual(string, #"{"name":"Swift","tiobeIndex":18,"version":"5.7"}"#)
         } else {
             XCTFail("let string: String = language.encode()")
         }
 
         // encode to String?
         if let string: String = language.json {
-            XCTAssertEqual(string, #"{"name":"Swift","version":"5.7","tiobeIndex":18}"#)
+            XCTAssertEqual(string, #"{"name":"Swift","tiobeIndex":18,"version":"5.7"}"#)
         } else {
             XCTFail("let string: String = language.encode()")
         }
@@ -128,8 +128,8 @@ class CodableExtTests: XCTestCase {
             XCTAssertEqual(string, #"""
             {
               "name" : "Swift",
-              "version" : "5.7",
-              "tiobeIndex" : 18
+              "tiobeIndex" : 18,
+              "version" : "5.7"
             }
             """#)
         } else {
